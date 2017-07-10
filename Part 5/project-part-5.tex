@@ -1,0 +1,669 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = lualatexmk-shell
+\RequirePackage{ucharcat,uspace,etex,shellesc}
+\RequirePackage[1.7,compress,objcompress]{bxpdfver}
+\documentclass[american,extrafontsizes,12pt,portrait,letterpaper,oneside,onecolumn,article,final]{memoir}
+\settypeoutlayoutunit{in}
+\pagestyle{plain}
+\setulmarginsandblock{1in}{1in}{*}
+\setlrmarginsandblock{1in}{1in}{*}
+\setheadfoot{0.5in}{0.5in}
+\usepackage{etoolbox,indentfirst,pdftexcmds,ragged2e,magicnum,atveryend,regexpatch,graphicx,dotlessi,checkend,calc,alphalph,thinsp,pbox,xfrac,xsavebox,xspace}
+\usepackage[usestackEOL]{stackengine}
+\usepackage[table]{xcolor}
+\usepackage{colorspace,longtable}
+\usepackage[longtable]{multirow}
+\usepackage{bigstrut,bigdelim,fontaxes,arydshln,diagbox,collcell,scalerel,hhline,fvextra}
+\usepackage{amssymb,amsmath,amsthm,delim}
+\usepackage{accents,mathtools,thmtools,empheq,iffont,unicode-math,realscripts,metalogo,mathpartir,luatextra,minted}
+\renewcommand\MintedPygmentize{/Library/Frameworks/Python.framework/Versions/Current/bin/pygmentize}
+\usepackage[normalem]{ulem}
+\setmainfont{DejaVuSerif}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Italic},
+BoldItalicFont={*-BoldItalic},
+FontFace={c}{n}{*Condensed},
+FontFace={cb}{n}{*Condensed-Bold},
+FontFace={c}{it}{*Condensed-Italic},
+FontFace={cb}{it}{*Condensed-BoldItalic}
+]
+\setsansfont{DejaVuSans}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Oblique},
+BoldItalicFont={*-BoldOblique},
+FontFace={c}{n}{*Condensed},
+FontFace={cb}{n}{*Condensed-Bold},
+FontFace={c}{it}{*Condensed-Oblique},
+FontFace={cb}{it}{*Condensed-BoldOblique},
+FontFace={el}{n}{*-ExtraLight}
+]
+\setmonofont{DejaVuSansMono}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Oblique},
+BoldItalicFont={*-BoldOblique}
+]
+\setmathfont{DejaVuSerif}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={up->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-Bold}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfup->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-Italic}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={it->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-BoldItalic}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={sfup->up,bb->bb,bbit->bbit},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-Bold}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfsfup->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-Oblique}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={sfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-BoldOblique}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfsfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSansMono}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={tt->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuMathTeXGyre}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase
+]
+\usepackage[inline]{enumitem}
+\usepackage{linegoal}
+\usepackage[linegoal,delarray]{tabu}
+\usepackage{hyphenat,hyperxmp,hyperref,polyglossia}
+\setdefaultlanguage[variant=american]{english}
+\usepackage[english=american,maxlevel=6]{csquotes}
+\usepackage[american]{selnolig}
+\usepackage[calc,useregional]{datetime2}
+\usepackage{microtype,tikz,tikzpagenodes}
+\usetikzlibrary{babel,scopes,quotes,calc,through,fit,matrix,chains,arrows.meta,circuits.logic.US,graphs,graphdrawing,automata,positioning,er,tikzmark}
+\usegdlibrary{trees,layered,force,circular,routing}
+\usepackage[tikz]{ocgx2}
+%\usepackage{showhyphens}
+\microtypesetup{activate=all}
+\hypersetup{unicode=true,pdflang={en}}
+\usemintedstyle{xcode}
+\nolig{ffic}{f|fic}
+\nolig{affin}{af|fin}
+\tikzstyle{every picture}+=[remember picture,outer sep=auto]
+
+\newcommand*\rnmath[1]{\(\displaystyle #1 \textstyle\)}
+\newcommand\band{\mathbin{∧}}
+\newcommand\bor{\mathbin{∨}}
+\newcommand\bnot{\mathopen{∼}}
+\newcommand\TT{\mathord{\symsfup{T}}}
+\newcommand\FF{\mathord{\symsfup{F}}}
+\newcommand\taut{\mathord{\symbfup{t}}}
+\newcommand\cont{\mathord{\symbfup{c}}}
+\newcommand\bqed{\mathpunct{∎}}
+\newcommand\blank{\mathord{-}}
+\newcommand\divslash{\mathbin{∕}}
+\newcommand\fracslash{\mathbin{⁄}}
+\DeclarePairedDelimiterX\divides[2]{}{}{#1 \mathrel{\delimsize∣} #2}
+\DeclarePairedDelimiterX\ndivides[2]{}{}{#1 \mathrel{\delimsize∤} #2}
+\newcommand\negative{\mathopen{-}}
+\newcommand\mult{\mathbin{·}}
+\newcommand\factorial{\mathclose{!}}
+\DeclarePairedDelimiter\floor{⌊}{⌋}
+\DeclarePairedDelimiter\ceiling{⌈}{⌉}
+\newcommand\exto{\mathpunct{϶}}
+\DeclarePairedDelimiter\card{\lvert}{\rvert}
+\newcommand*\rproj[1]{\mathop{π_{#1}}}
+\newcommand*\rsel[1]{\mathop{σ_{#1}}}
+\newcommand*\rname[1]{\mathop{ρ_{#1}}}
+\newcommand*\rjoin[1]{\mathbin{⋈_{#1}}}
+\newcommand\rcross{\mathbin{×}}
+\newcommand\runion{\mathbin{∪}}
+\newcommand\rintersection{\mathbin{∩}}
+\newcommand\rdiff{\mathbin{-}}
+\colorlet{gRed}{red!75!black}
+\colorlet{gBlue}{blue!75!black}
+\colorlet{gGray}{white!25!black}
+\newcommand*\email[2][]{\href[#1]{mailto:#2}{\nolinkurl{#2}}}
+\newcommand*\TODO{\textcolor{red}{[TODO]}\xspace}
+\newcommand*{\sqli}[1]{\mintinline[breaklines,breakbytokenanywhere]{sql}{#1}}
+\newcommand*{\sqlm}[1]{\text{\sqli{#1}}}
+
+\author{Timothy Gibson, Alexander Altman, and Schuyler Davis}
+\title{Team GLASTA's \emph{Fantastic Furniture}: Database Initialization}
+\date{\DTMdate{2017-04-27}}
+
+\begin{document}
+\checkandfixthelayout[nearest]
+\midsloppy
+\begin{Center}
+\textsf{\strong{\LARGE\thetitle}}
+\end{Center}
+
+\begin{samepage}%
+\section*{Team Info}
+\pdfbookmark[0]{Team Info}{team-info}%
+\begin{Center}
+\begin{tabu}[t]{rlr}
+\strong{Team Name:} & \multicolumn{2}{c}{Team GLASTA}\\
+\tabucline[2\arrayrulewidth]{-}
+\strong{Project Name:} & \multicolumn{2}{c}{\emph{Fantastic Furniture}}\\
+\tabucline[2\arrayrulewidth]{-}
+\ldelim\{{3}{*}[\strong{Participants:}] & Timothy Gibson & \email{tgibson1@csustan.edu}\\
+\tabucline{2-}
+& Alexander Altman & \email{aaltman@csustan.edu}\\
+\tabucline{2-}
+& Schuyler Davis & \email{sdavis20@csustan.edu}\\
+\end{tabu}
+\end{Center}%
+\end{samepage}
+
+\subsection*{Slip Days}
+\pdfbookmark[1]{Slip Days}{slip-days}%
+\begin{itemize}[leftmargin=*]
+\item Timothy Gibson is using 1 slip day and has 3 slip days remaining.
+\item Alexander Altman is using 1 slip day and has 3 slip days remaining.
+\item Schuyler Davis is using 1 slip day and has 3 slip days remaining.
+\end{itemize}
+
+\section*{Relations}
+\pdfbookmark[0]{Relations}{relations}%
+
+\inputminted[linenos,breaklines,breakbytokenanywhere]{sql}{normalized.sql}
+
+\section*{Table Creation Statements}
+\pdfbookmark[0]{Table Creation Statements}{creation}%
+
+\inputminted[linenos,breaklines,breakbytokenanywhere]{mysql}{mysql.sql}
+
+\section*{Data Counts}
+\pdfbookmark[0]{Data Counts}{counts}%
+
+\begin{longtabu}{rl}
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Supplier} & \rnmath{50}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Designer} & \rnmath{50}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Set_} & \rnmath{100}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Model} & \rnmath{1000}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Item} & \rnmath{1000}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{DistributionCenter} & \rnmath{50}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{make} & \rnmath{1000}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{contains_} & \rnmath{991}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{describes} & \rnmath{1000}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{canOrderFrom} & \rnmath{813}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{stocks} & \rnmath{274}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Chair} & \rnmath{185}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Table_} & \rnmath{171}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Desk} & \rnmath{149}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Stool} & \rnmath{183}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Cabinet} & \rnmath{171}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{Bedframe} & \rnmath{115}\\
+\mintinline[breaklines,breakbytokenanywhere]{mysql}{features_Feature} & \rnmath{8351}\\
+\end{longtabu}
+
+\section*{Sample Interactions}
+\pdfbookmark[0]{Sample Interactions}{interactions}%
+
+\begin{minted}[linenos,breaklines,breakanywhere]{text}
+mysql> explain Bedframe;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sku    | varchar(10) | NO   | PRI | NULL    |       |
+| size_  | varchar(30) | YES  |     | NULL    |       |
+| depth_ | double      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Bedframe values (('6yNuvTHGL9', 'double twin', 5.9));
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into Bedframe values ('6yNuvTHGL9', 'double twin', 5.9);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`aaltman`.`bedframe`, CONSTRAINT `bedframe_ibfk_1` FOREIGN KEY (`sku`) REFERENCES `Item` (`sku`))
+mysql> explain Item;
++-------------+-----------------+------+-----+---------+-------+
+| Field       | Type            | Null | Key | Default | Extra |
++-------------+-----------------+------+-----+---------+-------+
+| sku         | varchar(10)     | NO   | PRI | NULL    |       |
+| length_     | double unsigned | YES  |     | NULL    |       |
+| width       | double unsigned | YES  |     | NULL    |       |
+| height      | double unsigned | YES  |     | NULL    |       |
+| condition_  | varchar(30)     | YES  |     | NULL    |       |
+| weightLimit | double unsigned | YES  |     | NULL    |       |
++-------------+-----------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into Item values ('6yNuvTHGL9', 120.0, 70.0, 40.5, 'like new', 276.89);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Bedframe values ('6yNuvTHGL9', 'double twin', 5.9);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Item;
++------------+---------+-------+--------+------------+-------------+
+| sku        | length_ | width | height | condition_ | weightLimit |
++------------+---------+-------+--------+------------+-------------+
+| 6yNuvTHGL9 |     120 |    70 |   40.5 | like new   |      276.89 |
++------------+---------+-------+--------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Bedframe;
++------------+-------------+--------+
+| sku        | size_       | depth_ |
++------------+-------------+--------+
+| 6yNuvTHGL9 | double twin |    5.9 |
++------------+-------------+--------+
+1 row in set (0.00 sec)
+
+mysql> delete from Bedframe select * from Bedframe;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from Bedframe' at line 1
+mysql> delete from Bedframe;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> delete from Item;
+Query OK, 1 row affected (0.01 sec)
+\end{minted}
+
+\begin{itemize}[leftmargin=*]
+\item We learned the proper syntax for \mintinline{mysql}{INSERT} and \mintinline{mysql}{DELETE} statements.
+\item We learned not to insert a value in a table that has a foreign key constraint before that constraint is satisfied.
+\end{itemize}
+
+\section*{Data Sources}
+\pdfbookmark[0]{Data Sources}{sources}%
+
+We generated our data randomly, using the following C++ program (\mintinline[breaklines,breakbytokenanywhere]{text}{random_gen/random_gen.cpp}), along with some initial data files drawn from \url{https://www.random.org}:
+
+\inputminted[linenos,breaklines,breakbytokenanywhere]{c++}{random_gen/random_gen.cpp}
+
+We used the command syntax \mintinline[breaklines,breakbytokenanywhere,escapeinside=<>]{mysql}{load data local infile <\textsf{\{CSV file name\}}> ignore into table <\textsf{\{table name\}}> fields terminated by ',' optionally enclosed by '"';} to load the data into each table from the corresponding CSV file, which took care of duplicate entries by ignoring them; all other constraints were satisfied by construction due to the way the generation program was written and run.
+
+\section*{Data Samples}
+\pdfbookmark[0]{Data Samples}{samples}%
+
+\begin{minted}[linenos,breaklines,breakanywhere]{text}
+mysql> select * from Supplier limit 10;
++------------+------------------------------------+------------+-----------------------------------------------+---------+-----------------------------------------+
+| supplierID | name_                              | phone      | address                                       | country | website                                 |
++------------+------------------------------------+------------+-----------------------------------------------+---------+-----------------------------------------+
+| 06DeQdaf4X | The Snowy Pencil Leather Company   | 8039090134 | 379 Virginia St. Niagara Falls, NY 14304      | TR      | www.TheSnowyPencilLeatherCompany.biz    |
+| 0OaJOGFGdD | The Cloudy Chicken Fabrics Company | 8749357327 | 8247 S. Hamilton Drive Cedar Rapids, IA 52402 | TO      | www.TheCloudyChickenFabricsCompany.info |
+| 0x1V8UVLqh | The Deep Lamp Lumber Company       | 7463153612 | 72 Somerset Lane Ypsilanti, MI 48197          | AQ      | www.TheDeepLampLumberCompany.info       |
+| 3H7BBv3j7C | Tall Mouse Supplier                | 4123072387 | 9444 Blackburn Lane Wenatchee, WA 98801       | PA      | www.TallMouseSupplier.org               |
+| 3LnmekGoPa | The Happy Chinchilla Metal Company | 9115174479 | 50 Catherine Lane Huntsville, AL 35803        | ZM      | www.TheHappyChinchillaMetalCompany.com  |
+| 45AVHG6SDL | Big Light-Switch Metal             | 2219847475 | 9916 Bridgeton Ave. Austin, MN 55912          | AQ      | www.BigLight-SwitchMetal.org            |
+| 4hGbj2aBVR | Red Baboon Metal                   | 8433984003 | 860 Glen Ridge Rd. Whitestone, NY 11357       | BT      | www.RedBaboonMetal.net                  |
+| 4xp0ETTkc8 | The White Skunk Metal Company      | 2695261566 | 52 Deerfield Lane Woodhaven, NY 11421         | DJ      | www.TheWhiteSkunkMetalCompany.info      |
+| 5Hq7fF9aK0 | The Opaque Pear Supplier Company   | 9201886129 | 7254 Hickory Ave. Centreville, VA 20120       | CI      | www.TheOpaquePearSupplierCompany.org    |
+| 5SKHZGJsjV | Transparent Cherry Lumber          | 4623416776 | 1 Redwood Rd. Roanoke, VA 24012               | ZW      | www.TransparentCherryLumber.org         |
++------------+------------------------------------+------------+-----------------------------------------------+---------+-----------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Designer limit 10;
++------------+------------------+------------+---------------------------------------------------+---------+-------------------------+--------------+
+| designerID | name_            | phone      | address                                           | country | website                 | designFocus  |
++------------+------------------+------------+---------------------------------------------------+---------+-------------------------+--------------+
+| 3lejckzNYS | Lyndia Butler    | 7034816719 | 241 Morris Dr. Bowling Green, KY 42101            | PE      | www.LyndiaButler.org    | Mid-Century  |
+| 4MVbu2iI15 | Mellissa Rich    | 4623416776 | 4 Garden Rd. Dunedin, FL 34698                    | AW      | www.MellissaRich.biz    | Scandinavian |
+| 7RYpyw9es0 | Casimira Carney  | 1437523438 | 8498 Young Street Oklahoma City, OK 73112         | ML      | www.CasimiraCarney.com  | Industrial   |
+| 7ZZbCsXnv0 | Charmaine Pineda | 4204843909 | 497 Young Lane Panama City, FL 32404              | NL      | www.CharmainePineda.org | Rococo       |
+| A7oA1v9Ax1 | Renee Holmes     | 2589423308 | 78 Santa Clara Drive Huntsville, AL 35803         | ZW      | www.ReneeHolmes.org     | Modern       |
+| AZadqlHsUN | Elia Melton      | 7421854946 | 519 Bayberry Ave. Bayside, NY 11361               | SX      | www.EliaMelton.org      | Industrial   |
+| b9yOGUx3pl | Jeni Wilson      | 5416771400 | 215 Birchwood Ave. Boston, MA 02127               | KR      | www.JeniWilson.net      | Industrial   |
+| bBMMbiXWX2 | Ludivina Hunt    | 7071474222 | 9120 Santa Clara St. Huntington Station, NY 11746 | GP      | www.LudivinaHunt.net    | Rococo       |
+| bDcoTRYgku | Sierra Novak     | 2695261566 | 155 N. Elm Street Rego Park, NY 11374             | VN      | www.SierraNovak.org     | Scandinavian |
+| BejwYSNzm7 | Claribel Vasquez | 6712497760 | 256 Water Ave. Shelton, CT 06484                  | LA      | www.ClaribelVasquez.org | Eclecticism  |
++------------+------------------+------------+---------------------------------------------------+---------+-------------------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Set_ limit 10;
++------------+-----------------+-------------+----------------------+-------------+
+| setID      | name_           | catalogYear | catalogNumber        | style_      |
++------------+-----------------+-------------+----------------------+-------------+
+| 0naFKFb6se | dizzy set       |        2013 | 00000000000000000029 | dizzy       |
+| 0nZQJHrEtZ | fowl set        |        1992 | 00000000000000000013 | fowl        |
+| 0To5uOwhgK | spectacular set |        1986 | 00000000000000000040 | spectacular |
+| 1JtLYWK555 | receive set     |        1985 | 00000000000000000070 | receive     |
+| 5JnQxcSlvJ | earthquake set  |        1985 | 00000000000000000066 | earthquake  |
+| 6eHdxhCYK7 | fish set        |        2001 | 00000000000000000000 | fish        |
+| 73l1iRUEvw | capable set     |        2014 | 00000000000000000071 | capable     |
+| 73X8UvpzrJ | slip set        |        1998 | 00000000000000000093 | slip        |
+| 8blchiMxYL | right set       |        2000 | 00000000000000000038 | right       |
+| 980pBKGuMU | file set        |        2003 | 00000000000000000083 | file        |
++------------+-----------------+-------------+----------------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Model limit 10;
++-------------+---------------------------+----------+------------+-----------------+---------+
+| modelNumber | name_                     | material | upholstery | durability      | color   |
++-------------+---------------------------+----------+------------+-----------------+---------+
+| 00aWzohu8g  | Ancient Genteel Desk      | Ebony    | Wool       | Very Strong     | Orange  |
+| 02SVZ28q47  | Ancient Angular Stool     | Hemlock  | Nylon      | Very Wobbly     | Silver  |
+| 0aBIk36Hs2  | Contemporary Hefty Chair  | Afzelia  | Acetate    | Very Strong     | Indigo  |
+| 0JCfsD5Pck  | Futuristic Rounded Stool  | Maple    | Linen      | Sturdy          | Grey    |
+| 0KSfx7M1IN  | Contemporary Fat Desk     | Elm      | Cotton     | Very Wobbly     | Teal    |
+| 0KSjIO5LDu  | Eclectic Bowed Desk       | Cherry   | Cotton     | Sturdy          | Black   |
+| 0mp9PGPdKw  | Futuristic Bowed Bedframe | Balsa    | Linen      | Indestructable  | Gold    |
+| 0T2PaDHCEw  | Contemporary Light Chair  | Pine     | Acetate    | Somewhat Wobbly | Gold    |
+| 0uzi2lU3dA  | Large Wimpy Table         | Fir      | Polyester  | Very Sturdy     | Olive   |
+| 0vhyAaLCYg  | Italian Rounded Bedframe  | Pine     | Cotton     | Indestructable  | Magenta |
++-------------+---------------------------+----------+------------+-----------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Item limit 10;
++------------+---------+-------+--------+------------+-------------+
+| sku        | length_ | width | height | condition_ | weightLimit |
++------------+---------+-------+--------+------------+-------------+
+| 09S4mRvuGE |      61 |    66 |     51 | New        |         309 |
+| 0EbNx7hvlO |      64 |    58 |     48 | New        |         415 |
+| 0EKsH99oc8 |      64 |    67 |     58 | New        |         342 |
+| 0eLPBgmxXc |      67 |    57 |     53 | New        |         340 |
+| 0F6T8XT2R1 |      50 |    59 |     53 | New        |         310 |
+| 0hMisTAJ6K |      66 |    60 |     68 | New        |         311 |
+| 0RzRFaHBm4 |      48 |    50 |     69 | New        |         350 |
+| 0snow42N9H |      62 |    52 |     56 | New        |         325 |
+| 0t5AqpGvtk |      63 |    65 |     65 | New        |         372 |
+| 0WxtLk4cbX |      57 |    49 |     54 | New        |         302 |
++------------+---------+-------+--------+------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from DistributionCenter limit 10;
++------------+----------------------------------------------+------------+---------------------------------------------+---------+--------------------------------------------------+
+| centerID   | name_                                        | phone      | address                                     | country | website                                          |
++------------+----------------------------------------------+------------+---------------------------------------------+---------+--------------------------------------------------+
+| 0gkU23fhbT | Sub-Zero Duck Warehouse                      | 2738728093 | 7083 Green Court Pembroke Pines, FL 33028   | LA      | www.Sub-ZeroDuckWarehouse.com                    |
+| 0mslNHYadG | The Complicated Hamster Distribution Company | 8256624098 | 904 Creekside St. Pottstown, PA 19464       | UG      | www.TheComplicatedHamsterDistributionCompany.net |
+| 3D5zIxPUZv | Opaque Frog Storage                          | 1046485315 | 92 W. Princeton Rd. Long Beach, NY 11561    | KM      | www.OpaqueFrogStorage.info                       |
+| 4XdNKanfY1 | The White Pear Warehouse Company             | 8485622783 | 9810 Edgefield St. Natick, MA 01760         | WS      | www.TheWhitePearWarehouseCompany.com             |
+| 5RDZWNp0Ym | The Acute Turtle Warehouse Company           | 7003923806 | 99 Lower River Drive Mount Vernon, NY 10550 | KE      | www.TheAcuteTurtleWarehouseCompany.com           |
+| 8ECOfFZSgC | The Grey Squirrel Distribution Company       | 1437523438 | 827 Dogwood Ave. Saginaw, MI 48601          | LC      | www.TheGreySquirrelDistributionCompany.biz       |
+| a1Xzp6g1lw | Cold Fish Distributing                       | 8511426114 | 69 Bay Meadows Lane Bridgeton, NJ 08302     | KG      | www.ColdFishDistributing.com                     |
+| aD4TjXPcH4 | Joey Distribution                            | 5911329769 | 937 Cypress Street Butte, MT 59701          | NU      | www.JoeyDistribution.org                         |
+| At7FkrAz5m | Piping Bull Distributing                     | 9201886129 | 7254 Hickory Ave. Centreville, VA 20120     | EG      | www.PipingBullDistributing.net                   |
+| beYPqnGi9f | Sub-Zero Lemon Warehouse                     | 7463153612 | 72 Somerset Lane Ypsilanti, MI 48197        | FJ      | www.Sub-ZeroLemonWarehouse.com                   |
++------------+----------------------------------------------+------------+---------------------------------------------+---------+--------------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from make limit 10;
++------------+------------+------------+
+| supplierID | designerID | setID      |
++------------+------------+------------+
+| 3H7BBv3j7C | 3lejckzNYS | jYIzpoPJ0v |
+| 4hGbj2aBVR | 3lejckzNYS | pzZzDyittU |
+| 5SKHZGJsjV | 3lejckzNYS | ajPkfYW6Rd |
+| Dlq94L7rPh | 3lejckzNYS | LPi87bcU5k |
+| dWuUGFOe1b | 3lejckzNYS | Auae4YJ0eg |
+| ldbBahbqLj | 3lejckzNYS | MlgnC1JEJn |
+| s9Fptw806W | 3lejckzNYS | XrPPnXrnJ3 |
+| umALkT56Xy | 3lejckzNYS | grkjTJPNEP |
+| 4hGbj2aBVR | 4MVbu2iI15 | x0XpZD2q1n |
+| 4xp0ETTkc8 | 4MVbu2iI15 | aI8k5G0Fqi |
++------------+------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from contains_ limit 10;
++------------+-------------+--------+
+| setID      | modelNumber | count_ |
++------------+-------------+--------+
+| 0naFKFb6se | hv5bmT6oG9  |      4 |
+| 0naFKFb6se | JnxJCLw8rc  |      2 |
+| 0naFKFb6se | msWH7nqeNv  |      3 |
+| 0naFKFb6se | RfBTVUqoof  |      3 |
+| 0naFKFb6se | UhCgTjSXvT  |      2 |
+| 0nZQJHrEtZ | H7AK7JFI2z  |      5 |
+| 0nZQJHrEtZ | kphIGiILcS  |      6 |
+| 0nZQJHrEtZ | lqKAZ0fWr5  |      3 |
+| 0nZQJHrEtZ | OLFH7SPI6S  |      3 |
+| 0nZQJHrEtZ | ouZNXv6e6y  |      5 |
++------------+-------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from describes limit 10;
++-------------+------------+
+| modelNumber | sku        |
++-------------+------------+
+| 00aWzohu8g  | g3v6PqXumq |
+| 02SVZ28q47  | KRp6uvT5Nf |
+| 0aBIk36Hs2  | TBraGAJvxH |
+| 0JCfsD5Pck  | 4FsRw9nHzb |
+| 0KSfx7M1IN  | GeGjTFxfw7 |
+| 0KSjIO5LDu  | Xrrwxdca1D |
+| 0mp9PGPdKw  | fa5G2jkkGG |
+| 0T2PaDHCEw  | HIz1MJXQfO |
+| 0uzi2lU3dA  | UDYoo8F309 |
+| 0vhyAaLCYg  | PDhd8Kn8rC |
++-------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from canOrderFrom limit 10;
++------------+------------+----------+
+| centerID   | supplierID | leadTime |
++------------+------------+----------+
+| 0gkU23fhbT | 06DeQdaf4X |       28 |
+| 0gkU23fhbT | 0OaJOGFGdD |        5 |
+| 0gkU23fhbT | 3LnmekGoPa |       28 |
+| 0gkU23fhbT | 45AVHG6SDL |       17 |
+| 0gkU23fhbT | 5SKHZGJsjV |        1 |
+| 0gkU23fhbT | 7Hh3kV9mIX |       29 |
+| 0gkU23fhbT | 7n94AZBOkB |       28 |
+| 0gkU23fhbT | 9kQZDUILDP |       28 |
+| 0gkU23fhbT | dWuUGFOe1b |       12 |
+| 0gkU23fhbT | EMLwuAKAEG |       26 |
++------------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from stocks limit 10;
++------------+------------+
+| centerID   | sku        |
++------------+------------+
+| 0gkU23fhbT | 6wdiSd4mc0 |
+| 0gkU23fhbT | fB8CTGobFM |
+| 0gkU23fhbT | fdUqKPeyDL |
+| 0gkU23fhbT | INtjFxGvYo |
+| 0gkU23fhbT | mISzbMdNjf |
+| 0gkU23fhbT | nsfiUC8eEg |
+| 0gkU23fhbT | OMeAaXgdtd |
+| 0gkU23fhbT | RzHfSIqXgP |
+| 0mslNHYadG | C96OgY6RFU |
+| 0mslNHYadG | fSiM5um0Ex |
++------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Chair limit 10;
++------------+--------------+------------+---------+------------+------------+
+| sku        | numberOfLegs | hasCushion | hasArms | backHeight | seatHeight |
++------------+--------------+------------+---------+------------+------------+
+| 0RzRFaHBm4 |            4 |          0 |       0 |         30 |         37 |
+| 171xmqOt46 |            4 |          1 |       1 |         27 |         25 |
+| 1mtTrTYoiN |            4 |          0 |       1 |         25 |         42 |
+| 1OHH0exARc |            5 |          0 |       1 |         32 |         43 |
+| 1xIdirGiRI |            5 |          0 |       1 |         25 |         43 |
+| 2DUG1Jtxtm |            5 |          0 |       0 |         26 |         32 |
+| 2oXo7jOoTO |            4 |          0 |       1 |         29 |         43 |
+| 2PijUpIwmL |            4 |          0 |       0 |         27 |         26 |
+| 30B5Vsjt9F |            4 |          1 |       0 |         25 |         41 |
+| 3c4v9htJja |            4 |          1 |       0 |         25 |         25 |
++------------+--------------+------------+---------+------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Table_ limit 10;
++------------+--------------+---------------+-------------+
+| sku        | numberOfLegs | numberOfSeats | shape       |
++------------+--------------+---------------+-------------+
+| 0EKsH99oc8 |            8 |             6 | Round       |
+| 1masnS2t5q |            7 |             4 | Rectangular |
+| 2h36eG3k1r |            7 |             9 | Rectangular |
+| 2IQOLQOPsC |            6 |             4 | Round       |
+| 2k6FCNLgQa |            9 |             6 | Round       |
+| 2orEiGE7st |            5 |            10 | Rectangular |
+| 2sZn2Q9ZtV |            6 |             6 | Rectangular |
+| 4arqe70auT |            4 |             9 | Round       |
+| 4NeTvOLwsz |            7 |             8 | Rectangular |
+| 4OsyaTUMoa |            9 |             5 | Round       |
++------------+--------------+---------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Desk limit 10;
++------------+-------+-----------------+
+| sku        | angle | numberOfDrawers |
++------------+-------+-----------------+
+| 0t5AqpGvtk |     7 |               6 |
+| 0ZtpDsH7UG |     8 |               1 |
+| 1Lnhya8ugI |    11 |               3 |
+| 29ilUDyZOJ |    10 |               4 |
+| 301ctu2OrC |    34 |               6 |
+| 38JWLVLBbI |    14 |               6 |
+| 3deDlxVPvv |     9 |               4 |
+| 3XZONY6DCR |    39 |               3 |
+| 5MugiPD2JZ |     2 |               1 |
+| 5sX4ygONIN |    12 |               2 |
++------------+-------+-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Stool limit 10;
++------------+--------------+------------+-----------+
+| sku        | numberOfLegs | hasCushion | hasSwivel |
++------------+--------------+------------+-----------+
+| 0EbNx7hvlO |            3 |          1 |         1 |
+| 0snow42N9H |            5 |          0 |         0 |
+| 1cJboIO6HA |            4 |          1 |         0 |
+| 1IemqAoqLk |            3 |          0 |         1 |
+| 1ZIidFPuSJ |            4 |          1 |         0 |
+| 2O8vTBpTSp |            4 |          1 |         1 |
+| 3CyrMBvrG2 |            5 |          1 |         1 |
+| 3qI7CVoPFi |            3 |          1 |         0 |
+| 4mFkBSA9sZ |            3 |          0 |         1 |
+| 52CLg2zVKj |            3 |          0 |         0 |
++------------+--------------+------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Cabinet limit 10;
++------------+----------------------+----------+
+| sku        | numberOfCompartments | capacity |
++------------+----------------------+----------+
+| 09S4mRvuGE |                    6 | 8        |
+| 0eLPBgmxXc |                    3 | 6        |
+| 0F6T8XT2R1 |                    1 | 4        |
+| 17ApLkPoU6 |                    2 | 9        |
+| 1Ddecxm7cb |                    1 | 7        |
+| 1MeDZxrjEP |                    4 | 6        |
+| 1ykxqSZlb0 |                    1 | 2        |
+| 2YXJ88JhZg |                    2 | 3        |
+| 3fPhRkO5BI |                    3 | 10       |
+| 3jPPB5DgV3 |                    2 | 4        |
++------------+----------------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Bedframe limit 10;
++------------+-----------------+--------+
+| sku        | size_           | depth_ |
++------------+-----------------+--------+
+| 0EbNx7hvlO | Twin XL         |     35 |
+| 1xIdirGiRI | California King |     33 |
+| 2oXo7jOoTO | California King |     26 |
+| 4mFkBSA9sZ | King            |     41 |
+| 4OsyaTUMoa | California King |     38 |
+| 4SxmLVmwvL | King            |     24 |
+| 4uEa0JgHI2 | Twin            |     25 |
+| 4uSXR0shjD | Full            |     28 |
+| 4V4wXGK9BV | California King |     31 |
+| 53S4nBUolG | Queen           |     34 |
++------------+-----------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from features_Feature limit 10;
++-------------+---------------------+--------+
+| modelNumber | description         | count_ |
++-------------+---------------------+--------+
+| 00aWzohu8g  | Carved Inlays       |      5 |
+| 00aWzohu8g  | Fancy Molding       |      3 |
+| 00aWzohu8g  | Gold Hinges         |      2 |
+| 00aWzohu8g  | Gold Inlaid Designs |      1 |
+| 00aWzohu8g  | Ivory Handles       |      5 |
+| 00aWzohu8g  | Padded Feet         |      1 |
+| 00aWzohu8g  | Studded Corners     |      1 |
+| 00aWzohu8g  | Textured            |      4 |
+| 02SVZ28q47  | Carved Inlays       |      4 |
+| 02SVZ28q47  | Claw Feet           |      2 |
++-------------+---------------------+--------+
+10 rows in set (0.00 sec)
+\end{minted}
+
+\section*{Group Work}
+\pdfbookmark[0]{Group Work}{group-work}%
+\begin{samepage}%
+\begin{enumerate}[leftmargin=*,widest={Alexander:}]
+
+\item[Timothy:]
+\pdfbookmark[1]{Timothy}{Timothy}%
+Wrote the bulk of the C++ data generator, including rewriting it several times as requirements changed.
+
+\item[Alexander:]
+\pdfbookmark[1]{Alexander}{Alexander}%
+Wrote the bulk of the MySQL table creation statements, assisted with debugging the C++ data generator, and loaded the data into the database once it was generated.
+
+\item[Schuyler:]
+\pdfbookmark[1]{Schuyler}{Schuyler}%
+Assisted with various parts of the table creation and data generation.
+
+\end{enumerate}%
+\end{samepage}
+
+\end{document}

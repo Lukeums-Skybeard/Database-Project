@@ -1,0 +1,73 @@
+Supplier
+
+Supplier is in BCNF. Each functional dependency in the relation points back to supplierID. Every other attribute of the relation is dependent on supplierID and as such is a member of the candidate key. Also, every attribute of the Supplier relation is functionally determined by supplierID, making it the superkey.
+
+Designer
+
+Designer is in BCNF. designerID determines every attribute of the Designer relation. This effectively makes designerID the superkey for the Designer relation.
+
+Set_
+
+The Set_ relation is in BCNF. Set_ has a candidate key that is setID. Each attribute of Set_ is unique to a specific setID. This indicates that each attribute is determined by that setID. This makes setID the superkey for Set_. From this, it lends that Set_ is in BCNF because that for every non-trivial Functional Dependency, setID is the superkey.
+
+Model
+
+Model is in BCNF. For every attribute of the Model relation, they are functionally determined by the modelNumber, meaning that they are only determined by one specific modelNumber. This makes modelNumber the superkey for Model.
+
+Item
+
+The Item relation is in BCNF. The attribute sku is a single identifier for each individual item. Each item has one name, length, width, height, and weightLimit. Each of these attributes are dependent on one sku. This makes sku the superkey for Item. Since all attributes are dependent on a single sku then Item is in BCNF. In our original SQL, the Item relation used a type that was created specifically for that relation in its table. That type has now been definec in-line inside of the table for it to comply with BCNF guidelines.
+
+DistributionCenter
+
+DistributionCenter is in BCNF. Each name_, phone, address, country, and website is specific to one centerID. This makes centerID the superkey for the DistributionCenter relation. Since each attribute is only populated by one tuple and the superkey determines every attribute, then the DistributionCenter relation is in BCNF.
+
+Make
+
+The make relation is in BCNF. the make relation only contains non non-trivial Functional Dependencies and does not contain any of its own candidate keys or superkeys. So, the make relation is in BCNF.
+
+contains_
+
+The contains relation is in BCNF. The contains relation has a Primary Key of both modelNumver and setID. These two together effectively become the superkey and since the count of the contains relation can be determined by the setID and modelNumber, contains is in BCNF.
+
+Describes
+
+The Describes relation is in BCNF. The describes relation includes two foreign keys that are also primary keys. These two keys are modelNumber and sku. The modelNumber specifically determines a single sku. This means that sku is dependent on the modelNumber and that modelNumber is the superkey. Since the only non-trivial Functional Dependency in the Describes relation involves the superkey determining the other attribute, describes is in BCNF.
+
+canOrderFrom
+
+The canOrderFrom relation is in BCNF. The canOrderFrom relation has an attribute called leadTime. This leadTime is dependent on the distribution center (identified by centerID) and the Supplier (identified by supplierID). This centerID and supplierID are both primary keys for canOrderFrom and make up its superkey. For this reason, canOrderFrom is in BCNF.
+
+Stocks.
+
+The stocks relation is in BCNF. The stocks relation contains two primary keys, sku and centerID. Since centerID is dependent on sku and the stocks relation borrows both sku and centerID from other relations, these two keys are the superkey. For this reason, Stocks is in BCNF.
+
+Feature
+
+This relation is in BCNF. The Feature relation has a primary key that it contains called description. This description, however long it may be, will be distinct meaning that each feature has a specific description fitting to that specific feature. This makes description the superkey for Feature. Also, since count_ is dependent specifically on the description of that feature, it is dependent on the superkey, this means that Feature is in BCNF.
+
+Chair
+
+The Chair relation is in BCNF. The chair relation is a subset of the Item relation. Each chair has one of each of its attributes that is strictly related to its sku. This makes the sku the superkey for the Chair relation. As such, since each Functional Dependency is dependent on sku, Chair is in BCNF.
+
+Table
+
+The Table relation is in BCNF. The table relation is a subset of the Item relation. Each table has one of each of its attributes that is strictly related to its sku. This makes the sku the superkey for the Table relation. As such, since each Functional Dependency is dependent on sku, Table is in BCNF.
+
+Desk
+
+The Desk relation is in BCNF. The Desk relation is a subset of the Item relation. Each Desk has one of each of its attributes that is strictly related to its sku. This makes the sku the superkey for the Desk relation. As such, since each Functional Dependency is dependent on sku, Desk is in BCNF.
+
+
+Stool
+
+The Stool relation is in BCNF. The Stool relation is a subset of the Item relation. Each Stool has one of each of its attributes that is strictly related to its sku. This makes the sku the superkey for the Stool relation. As such, since each Functional Dependency is dependent on sku, Stool is in BCNF.
+
+Cabinet
+
+The Cabinet relation is in BCNF. The Cabinet relation is a subset of the Item relation. Each Cabinet has one of each of its attributes that is strictly related to its sku. This makes the sku the superkey for the Cabinet relation. As such, since each Functional Dependency is dependent on sku, Cabinet is in BCNF.
+
+
+Bedframe
+
+The Bedframe relation is in BCNF. The Bedframe relation is a subset of the Item relation. Each Bedframe has one of each of its attributes that is strictly related to its sku. This makes the sku the superkey for the Bedframe relation. As such, since each Functional Dependency is dependent on sku, Bedframe is in BCNF.

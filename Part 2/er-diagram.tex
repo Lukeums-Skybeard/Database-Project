@@ -1,0 +1,484 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = lualatexmk-shell
+\RequirePackage{ucharcat,uspace,etex,shellesc}
+\RequirePackage[1.7,compress,objcompress]{bxpdfver}
+\documentclass[american,extrafontsizes,12pt,portrait,letterpaper,oneside,onecolumn,article,final]{memoir}
+\settypeoutlayoutunit{in}
+\pagestyle{empty}
+\setulmarginsandblock{1in}{1in}{*}
+\setlrmarginsandblock{1in}{1in}{*}
+\setheadfoot{0.5in}{0.5in}
+\usepackage{indentfirst,pdftexcmds,ragged2e,magicnum,atveryend,etextools,regexpatch,graphicx,dotlessi,checkend,calc,alphalph,thinsp,pbox,xfrac,stackengine,xsavebox}
+\usepackage[table]{xcolor}
+\usepackage{colorspace,longtable,multirow,bigstrut,bigdelim,fontaxes,arydshln,diagbox,collcell,scalerel,hhline}
+\usepackage{amssymb,amsmath,amsthm,delim}
+\usepackage{accents,mathtools,thmtools,empheq,iffont,unicode-math,realscripts,metalogo,mathpartir,luatextra}
+\usepackage[normalem]{ulem}
+\setmainfont{DejaVuSerif}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Italic},
+BoldItalicFont={*-BoldItalic},
+FontFace={c}{n}{*Condensed},
+FontFace={cb}{n}{*Condensed-Bold},
+FontFace={c}{it}{*Condensed-Italic},
+FontFace={cb}{it}{*Condensed-BoldItalic}
+]
+\setsansfont{DejaVuSans}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Oblique},
+BoldItalicFont={*-BoldOblique},
+FontFace={c}{n}{*Condensed},
+FontFace={cb}{n}{*Condensed-Bold},
+FontFace={c}{it}{*Condensed-Oblique},
+FontFace={cb}{it}{*Condensed-BoldOblique},
+FontFace={el}{n}{*-ExtraLight}
+]
+\setmonofont{DejaVuSansMono}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Oblique},
+BoldItalicFont={*-BoldOblique}
+]
+\setmathfont{DejaVuMathTeXGyre}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase
+]
+\setmathfont{DejaVuSerif}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={up->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-Bold}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfup->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-Italic}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={it->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-BoldItalic}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={sfup->up,bb->bb,bbit->bbit},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-Bold}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfsfup->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-Oblique}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={sfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-BoldOblique}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfsfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSansMono}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={tt->up},
+script-features={},
+sscript-features={}
+]
+\usepackage[inline]{enumitem}
+\usepackage{linegoal}
+\usepackage[linegoal,delarray]{tabu}
+\usepackage{hyphenat,hyperref,polyglossia}
+\setdefaultlanguage[variant=american]{english}
+\usepackage[english=american,maxlevel=6]{csquotes}
+\usepackage[american]{selnolig}
+\usepackage[calc,useregional]{datetime2}
+\usepackage{microtype,tikz,tikzpagenodes}
+\usetikzlibrary{babel,scopes,quotes,calc,through,fit,matrix,chains,arrows.meta,circuits.logic.US,graphs,graphdrawing,automata,positioning,er,tikzmark}
+\usegdlibrary{trees,layered,force,circular,routing}
+\usepackage[tikz]{ocgx2}
+%\usepackage{showhyphens}
+\microtypesetup{activate=all}
+\hypersetup{unicode}
+\nolig{ffic}{f|fic}
+\nolig{affin}{af|fin}
+\tikzstyle{every picture}+=[remember picture,outer sep=auto]
+
+\newcommand*\rnmath[1]{\(\displaystyle #1 \textstyle\)}
+\newcommand\band{\mathbin{∧}}
+\newcommand\bor{\mathbin{∨}}
+\newcommand\bnot{\mathopen{∼}}
+\newcommand\TT{\mathord{\symsfup{T}}}
+\newcommand\FF{\mathord{\symsfup{F}}}
+\newcommand\taut{\mathord{\symbfup{t}}}
+\newcommand\cont{\mathord{\symbfup{c}}}
+\newcommand\bqed{\mathpunct{∎}}
+\newcommand\blank{\mathord{-}}
+\newcommand\divslash{\mathbin{∕}}
+\newcommand\fracslash{\mathbin{⁄}}
+\DeclarePairedDelimiterX\divides[2]{}{}{#1 \mathrel{\delimsize∣} #2}
+\DeclarePairedDelimiterX\ndivides[2]{}{}{#1 \mathrel{\delimsize∤} #2}
+\newcommand\negative{\mathopen{-}}
+\newcommand\mult{\mathbin{·}}
+\newcommand\factorial{\mathclose{!}}
+\DeclarePairedDelimiter\floor{⌊}{⌋}
+\DeclarePairedDelimiter\ceiling{⌈}{⌉}
+\newcommand\exto{\mathpunct{϶}}
+\DeclarePairedDelimiter\card{\lvert}{\rvert}
+\colorlet{gRed}{red!75!black}
+\colorlet{gBlue}{blue!75!black}
+\colorlet{gGray}{white!25!black}
+\newcommand*\email[2][]{\href[#1]{mailto:#2}{\nolinkurl{#2}}}
+\newcommand*\TODO{\textcolor{red}{[TODO]}}
+
+\author{Timothy Gibson, Alexander Altman, and Schuyler Davis}
+\title{Team GLASTA's \emph{Fantastic Furniture}: ER Diagram}
+\date{\DTMdate{2017-02-14}}
+
+\begin{document}
+\checkandfixthelayout[nearest]
+\midsloppy
+\begin{Center}
+\textsf{\strong{\LARGE\thetitle}}
+\end{Center}
+
+\section*{Team Info}
+\begin{Center}
+\begin{tabu}[t]{rlr}
+\strong{Team Name:} & \multicolumn{2}{c}{Team GLASTA}\\
+\tabucline[2\arrayrulewidth]{-}
+\strong{Project Name:} & \multicolumn{2}{c}{\emph{Fantastic Furniture}}\\
+\tabucline[2\arrayrulewidth]{-}
+\ldelim\{{3}{*}[\strong{Participants:}] & Timothy Gibson & \email{tgibson1@csustan.edu}\\
+\tabucline{2-}
+& Alexander Altman & \email{aaltman@csustan.edu}\\
+\tabucline{2-}
+& Schuyler Davis & \email{sdavis20@csustan.edu}\\
+\end{tabu}
+\end{Center}
+
+\section*{Diagram}
+{\small%
+\begin{Center}
+\pdfbookmark[0]{ER Diagram}{diagram}%
+\begin{tikzpicture}[outer sep=auto,spring electrical layout,baseline=(Item.base)]
+
+% top-level entities
+\node[entity,nail at={($ (0em,-6em) + (east:15em) $)}] (Supplier) {\hyperlink{Supplier}{Supplier}};
+\node[entity,nail at={(0em,-12em)}] (Set) {\hyperlink{Set}{Set}};
+\node[entity,nail at={(0em,-24em)}] (Model) {\hyperlink{Model}{Model}};
+\node[entity,nail at={(0em,-36em)}] (Item) {\hyperlink{Item}{Item}};
+\node[entity,nail at={(0em,0em)}] (Designer) {\hyperlink{Designer}{Designer}};
+\node[entity,nail at={($ (0em,-24em) + (east:20.5em) + (south:2em) $)}] (DistributionCenter) {\hyperlink{DistributionCenter}{Distribution Center}};
+
+% weak entities
+\node[entity,double,nail at={($ (0em,-24em) + (east:12em) + (north:8em) $)}] (Finish) {\hyperlink{Finish}{Finish}};
+\node[entity,double,nail at={($ (0em,-24em) + (west:19em) $)}] (Feature) {\hyperlink{Feature}{Feature}};
+
+% sub-entities of "Item"
+\node[entity,nail at={($ (0em,-40em) + (west:8em) $)}] (Chair) {\hyperlink{Chair}{Chair}};
+\node[entity,nail at={($ (0em,-40em) + (-144:9em) $)}] (Table) {\hyperlink{Table}{Table}};
+\node[entity,nail at={($ (0em,-40em) + (-108:10em) $)}] (Desk) {\hyperlink{Desk}{Desk}};
+\node[entity,nail at={($ (0em,-40em) + (-72:10em) $)}] (Stool) {\hyperlink{Stool}{Stool}};
+\node[entity,nail at={($ (0em,-40em) + (-36:9em) $)}] (Cabinet) {\hyperlink{Cabinet}{Cabinet}};
+\node[entity,nail at={($ (0em,-40em) + (east:8em) $)}] (Bedframe) {\hyperlink{Bedframe}{Bedframe}};
+
+% top-level relationships
+\node[relationship,nail at={(0em,-6em)}] (Supplier-Designer-Set-rel) {\hyperlink{Supplier-Designer-Set-rel}{make}};
+\node[relationship,nail at={(0em,-18em)}] (Set-Model-rel) {\hyperlink{Set-Model-rel}{contains}};
+\node[relationship,nail at={(0em,-30em)}] (Model-Item-rel) {\hyperlink{Model-Item-rel}{describes}};
+\node[relationship,nail at={($ (0em,-24em) + (east:20.5em) + (north:10em) $)}] (DistributionCenter-Supplier-rel) {\hyperlink{DistributionCenter-Supplier-rel}{\parbox[c]{3em}{\centering{can order from}}}};
+\node[relationship,nail at={($ (0em,-24em) + (east:20.5em) + (south west:8em) $)}] (DistributionCenter-Item-rel) {\hyperlink{DistributionCenter-Item-rel}{stocks}};
+
+% weak relationships
+\node[relationship,double,nail at={($ (0em,-24em) + (east:10em) $)}] (Model-Finish-rel) {\hyperlink{Model-Finish-rel}{\parbox[c]{4em}{\centering{is finished with}}}};
+\node[relationship,double,nail at={($ (0em,-24em) + (west:10em) $)}] (Model-Feature-rel) {\hyperlink{Model-Feature-rel}{features}};
+
+% sub-entity circles
+\node[draw,circle,nail at={(0em,-40em)}] (Item-Sub) {\hyperlink{Item}{o}};
+
+% edges for top-level relationships
+\draw
+(Supplier) edge[double,"\rnmath{(1,1)}"] (Supplier-Designer-Set-rel) (Designer) edge[double,"\rnmath{(1,1)}"] (Supplier-Designer-Set-rel) (Supplier-Designer-Set-rel) edge[double,"\rnmath{(1,M)}"] (Set)
+(Set) edge["\rnmath{(0,M)}"] (Set-Model-rel) (Set-Model-rel) edge[double,"\rnmath{(1,N)}"] (Model)
+(Model) edge[double,"\rnmath{(1,1)}"] (Model-Item-rel) (Model-Item-rel) edge[double,"\rnmath{(1,M)}" swap] (Item)
+(DistributionCenter) edge[double,"\rnmath{(1,M)}" swap] (DistributionCenter-Supplier-rel) (DistributionCenter-Supplier-rel) edge[double,"\rnmath{(1,N)}"] (Supplier)
+(DistributionCenter) edge[double,"\rnmath{(1,1)}"] (DistributionCenter-Item-rel) (DistributionCenter-Item-rel) edge[double,"\rnmath{(1,M)}" swap] (Item)
+;
+
+% edges for weak relationships
+\draw
+(Model) edge["\rnmath{(0,1)}"] (Model-Finish-rel) (Model-Finish-rel) edge[double,"\rnmath{(1,1)}" swap] (Finish)
+(Model) edge["\rnmath{(0,N)}"] (Model-Feature-rel) (Model-Feature-rel) edge[double,"\rnmath{(1,1)}"] (Feature)
+;
+
+% edges for "Item" and its sub-entities
+\draw
+(Item) edge (Item-Sub)
+(Item-Sub) edge["\hyperlink{Chair}{\rnmath{\supset}}" {sloped,anchor=mid,allow upside down}] (Chair)
+(Item-Sub) edge["\hyperlink{Table}{\rnmath{\supset}}" {sloped,anchor=mid,allow upside down}] (Table)
+(Item-Sub) edge["\hyperlink{Desk}{\rnmath{\supset}}" {sloped,anchor=mid,allow upside down}] (Desk)
+(Item-Sub) edge["\hyperlink{Stool}{\rnmath{\supset}}" {sloped,anchor=mid,allow upside down}] (Stool)
+(Item-Sub) edge["\hyperlink{Cabinet}{\rnmath{\supset}}" {sloped,anchor=mid,allow upside down}] (Cabinet)
+(Item-Sub) edge["\hyperlink{Bedframe}{\rnmath{\supset}}" {sloped,anchor=mid,allow upside down}] (Bedframe)
+;
+
+% attributes of "Supplier"
+\node[attribute,nail at={($ (0em,-6em) + (east:15em) + (west:7em) + (south:3em) $)}] (Supplier-id) {\uline{Supplier ID}}; \draw (Supplier) edge (Supplier-id);
+\node[attribute,nail at={($ (0em,-6em) + (east:15em) + (north:4em) $)}] (Supplier-name) {name}; \draw (Supplier) edge (Supplier-name);
+\node[attribute,nail at={($ (0em,-6em) + (east:15em) + (south:3em) + (east:7em) $)}] (Supplier-address) {address}; \draw (Supplier) edge (Supplier-address);
+\node[attribute,nail at={($ (0em,-6em) + (east:15em) + (north:3em) + (east:6em) $)}] (Supplier-phone) {phone}; \draw (Supplier) edge (Supplier-phone);
+\node[attribute,nail at={($ (0em,-6em) + (east:15em) + (north:6em) + (east:5em) $)}] (Supplier-country) {country}; \draw (Supplier) edge (Supplier-country);
+\node[attribute,nail at={($ (0em,-6em) + (east:15em) + (east:8em) $)}] (Supplier-website) {website}; \draw (Supplier) edge (Supplier-website);
+
+% attributes of "Designer"
+\node[attribute,nail at={($ (0em,0em) + (west:8em) + (south:3em) $)}] (Designer-id) {\uline{Designer ID}}; \draw (Designer) edge (Designer-id);
+\node[attribute,nail at={($ (0em,0em) + (north:4em) $)}] (Designer-name) {name}; \draw (Designer) edge (Designer-name);
+\node[attribute,nail at={($ (0em,0em) + (north:3em) + (west:6em) $)}] (Designer-address) {address}; \draw (Designer) edge (Designer-address);
+\node[attribute,nail at={($ (0em,0em) + (north:3em) + (east:6em) $)}] (Designer-phone) {phone}; \draw (Designer) edge (Designer-phone);
+\node[attribute,nail at={($ (0em,0em) + (west:8em) $)}] (Designer-country) {country}; \draw (Designer) edge (Designer-country);
+\node[attribute,nail at={($ (0em,0em) + (east:8em) $)}] (Designer-website) {website}; \draw (Designer) edge (Designer-website);
+\node[attribute,nail at={($ (0em,0em) + (east:8em) + (south:3em) $)}] (Designer-design-focus) {design focus}; \draw (Designer) edge (Designer-design-focus);
+
+% attributes of "Set"
+\node[attribute,nail at={($ (0em,-12em) + (north west:4em) + (west:3em) $)}] (Set-id) {\uline{set ID}}; \draw (Set) edge (Set-id);
+\node[attribute,nail at={($ (0em,-12em) + (south east:4em) + (east:3em) $)}] (Set-name) {name}; \draw (Set) edge (Set-name);
+\node[attribute,nail at={($ (0em,-12em) + (south west:4em) + (west:3em) $)}] (Set-style) {style}; \draw (Set) edge (Set-style);
+\node[attribute,nail at={($ (0em,-12em) + (west:9em) $)}] (Set-catalog-year) {catalog year}; \draw (Set) edge (Set-catalog-year);
+\node[attribute,nail at={($ (0em,-12em) + (east:8em) $)}] (Set-catalog-num) {catalog \#}; \draw (Set) edge (Set-catalog-num);
+
+% attributes of "contains"
+\node[attribute,nail at={($ (0em,-18em) + (west:6em) $)}] (Set-Model-rel-count) {count}; \draw (Set-Model-rel) edge (Set-Model-rel-count);
+
+% attributes of "can order from"
+\node[attribute,nail at={($ (0em,-24em) + (east:20.5em) + (north:10em) + (south west:6em) + (east:1.5em) $)}] (DistributionCenter-Supplier-rel-lead-time) {\parbox[c]{3em}{\centering{lead time}}}; \draw (DistributionCenter-Supplier-rel) edge (DistributionCenter-Supplier-rel-lead-time);
+
+% attributes of "Model"
+\node[attribute,nail at={($ (0em,-24em) + (north west:4em) + (west:3em) $)}] (Model-id) {\uline{Model \#}}; \draw (Model) edge (Model-id);
+\node[attribute,nail at={($ (0em,-24em) + (south east:4em) + (east:3em) $)}] (Model-name) {name}; \draw (Model) edge (Model-name);
+\node[attribute,nail at={($ (0em,-24em) + (south west:4em) + (west:3em) $)}] (Model-material) {material}; \draw (Model) edge (Model-material);
+
+% attributes of "Finish"
+\node[attribute,nail at={($ (0em,-24em) + (east:12em) + (north:8em) + (north east:4em) + (north:0.5em) $)}] (Finish-color) {\dashuline{color}}; \draw (Finish) edge (Finish-color);
+\node[attribute,nail at={($ (0em,-24em) + (east:12em) + (north:8em) + (south east:4em) + (east:1.5em) + (south:3em) $)}] (Finish-durability) {\dashuline{durability}}; \draw (Finish) edge (Finish-durability);
+\node[attribute,nail at={($ (0em,-24em) + (east:12em) + (north:8em) + (south west:6em) + (north:1.5em) + (west:1em) $)}] (Finish-upholstery) {\dashuline{upholstery}}; \draw (Finish) edge (Finish-upholstery);
+
+% attributes of "Feature"
+\node[attribute,nail at={($ (0em,-24em) + (west:19em) + (north:5em) $)}] (Feature-description) {\dashuline{description}}; \draw (Feature) edge (Feature-description);
+\node[attribute,nail at={($ (0em,-24em) + (west:19em) + (south:5em) $)}] (Feature-count) {count}; \draw (Feature) edge (Feature-count);
+
+% attributes of "Item"
+\node[attribute,nail at={($ (0em,-36em) + (north west:4em) + (west:3em) $)}] (Item-id) {\uline{SKU}}; \draw (Item) edge (Item-id);
+\node[attribute,nail at={($ (0em,-36em) + (west:8em) $)}] (Item-condition) {condition}; \draw (Item) edge (Item-condition);
+\node[attribute,nail at={($ (0em,-36em) + (east:9em) $)}] (Item-weight-limit) {weight limit}; \draw (Item) edge (Item-weight-limit);
+\node[attribute,nail at={($ (0em,-36em) + (north east:4em) + (east:10em) $)}] (Item-dimensions) {dimensions}; \draw (Item) edge (Item-dimensions);
+
+% attributes of "Distribution Center"
+\node[attribute,nail at={($ (0em,-24em) + (east:20.5em) + (south:2em) + (south:14em) $)}] (DistributionCenter-id) {\uline{Center ID}}; \draw (DistributionCenter) edge[bend left=66] (DistributionCenter-id);
+\node[attribute,nail at={($ (0em,-24em) + (east:20.5em) + (south:2em) + (west:10em) + (south west:6em) + (north:0.5em) $)}] (DistributionCenter-name) {name}; \draw (DistributionCenter) edge[bend right=5] (DistributionCenter-name);
+\node[attribute,nail at={($ (0em,-24em) + (east:20.5em) + (south:2em) + (south:5em) $)}] (DistributionCenter-address) {address}; \draw (DistributionCenter) edge (DistributionCenter-address);
+\node[attribute,nail at={($ (0em,-24em) + (east:20.5em) + (south:2em) + (north:3em) + (east:3em) $)}] (DistributionCenter-phone) {phone}; \draw (DistributionCenter) edge (DistributionCenter-phone);
+\node[attribute,nail at={($ (0em,-24em) + (east:20.5em) + (south:2em) + (south:8em) $)}] (DistributionCenter-country) {country}; \draw (DistributionCenter) edge[bend left=60] (DistributionCenter-country);
+\node[attribute,nail at={($ (0em,-24em) + (east:20.5em) + (south:2em) + (south:11em) $)}] (DistributionCenter-website) {website}; \draw (DistributionCenter) edge[bend left=63] (DistributionCenter-website);
+
+% attributes of "Chair"
+\node[attribute,nail at={($ (0em,-40em) + (west:8em) + (west:10em) $)}] (Chair-back-height) {back height}; \draw (Chair) edge (Chair-back-height);
+\node[attribute,nail at={($ (0em,-40em) + (west:8em) + (south west:4em) + (west:5em) $)}] (Chair-seat-height) {seat height}; \draw (Chair) edge (Chair-seat-height);
+\node[attribute,nail at={($ (0em,-40em) + (west:8em) + (west:9em) + (north:8em) $)}] (Chair-num-legs) {\# of legs}; \draw (Chair) edge (Chair-num-legs);
+\node[attribute,nail at={($ (0em,-40em) + (west:8em) + (west:12em) + (north:3em) $)}] (Chair-arms) {arms?}; \draw (Chair) edge (Chair-arms);
+\node[attribute,nail at={($ (0em,-40em) + (west:8em) + (west:10.5em) + (north:5.5em) $)}] (Chair-cushion) {cushion?}; \draw (Chair) edge (Chair-cushion);
+
+% attributes of "Table"
+\node[attribute,nail at={($ (0em,-40em) + (-144:9em) + (west:7em) + (south:0.5em) $)}] (Table-num-legs) {\# of legs}; \draw (Table) edge (Table-num-legs);
+\node[attribute,nail at={($ (0em,-40em) + (-144:9em) + (-144:6em) $)}] (Table-shape) {shape}; \draw (Table) edge (Table-shape);
+\node[attribute,nail at={($ (0em,-40em) + (-144:9em) + (-144:6em) + (south:0.5em) + (west:7em) $)}] (Table-num-seats) {\# of seats}; \draw (Table) edge (Table-num-seats);
+
+% attributes of "Desk"
+\node[attribute,nail at={($ (0em,-40em) + (-108:10em) + (-108:4em) + (west:1em) $)}] (Desk-num-drawers) {\# of drawers}; \draw (Desk) edge (Desk-num-drawers);
+\node[attribute,nail at={($ (0em,-40em) + (-108:10em) + (-108:4em) + (west:9em) $)}] (Desk-angle) {angle}; \draw (Desk) edge (Desk-angle);
+
+% attributes of "Stool"
+\node[attribute,nail at={($ (0em,-40em) + (-72:10em) + (-72:4em) $)}] (Stool-num-legs) {\# of legs}; \draw (Stool) edge (Stool-num-legs);
+\node[attribute,nail at={($ (0em,-40em) + (-72:10em) + (-72:4em) + (east:8em) $)}] (Stool-cushion) {cushion?}; \draw (Stool) edge (Stool-cushion);
+\node[attribute,nail at={($ (0em,-40em) + (-72:10em) + (-72:4em) + (east:12em) + (north:2em) $)}] (Stool-swivel) {swivel?}; \draw (Stool) edge (Stool-swivel);
+
+% attributes of "Cabinet"
+\node[attribute,nail at={($ (0em,-40em) + (-36:9em) + (-36:6em) + (east:2em) $)}] (Cabinet-num-compartments) {\# of compartments}; \draw (Cabinet) edge (Cabinet-num-compartments);
+\node[attribute,nail at={($ (0em,-40em) + (-36:9em) + (east:8em) + (south:0.5em) $)}] (Cabinet-capacity) {capacity}; \draw (Cabinet) edge (Cabinet-capacity);
+
+% attributes of "Bedframe"
+\node[attribute,nail at={($ (0em,-40em) + (east:8em) + (south east:4em) + (east:3em) $)}] (Bedframe-depth) {depth}; \draw (Bedframe) edge (Bedframe-depth);
+\node[attribute,nail at={($ (0em,-40em) + (east:8em) + (east:6em) $)}] (Bedframe-size) {size}; \draw (Bedframe) edge (Bedframe-size);
+
+\end{tikzpicture}
+\end{Center}%
+}
+
+\section*{Explanations}
+\pdfbookmark[0]{Explanations}{explanations}%
+\begin{enumerate}[leftmargin=*,widest={\strong{Distribution Center:}}]
+
+\item[\strong{\hypertarget{Supplier}{Supplier}:}]
+\pdfbookmark[1]{Supplier}{Supplier}%
+A person or company that supplies sets of furniture.
+
+\item[\strong{\hypertarget{Designer}{Designer}:}]
+\pdfbookmark[1]{Designer}{Designer}%
+A person or company that designs sets of furniture.
+
+\item[\emph{\hypertarget{Supplier-Designer-Set-rel}{make}:}]
+\pdfbookmark[1]{make}{Supplier-Designer-Set-rel}%
+What a designer and supplier do together, which is to design and then supply a set of furniture.
+
+\item[\strong{\hypertarget{Set}{Set}:}]
+\pdfbookmark[1]{Set}{Set}%
+A collection of pieces of furniture that fit into one aesthetic style or are part of a matching group of pieces.
+
+\item[\emph{\hypertarget{Set-Model-rel}{contains}:}]
+\pdfbookmark[1]{contains}{Set-Model-rel}%
+Each set of furniture incorporates many different models of furniture.
+These models will all fit the same color, design, or aesthetic style.
+
+\item[\strong{\hypertarget{Model}{Model}:}]
+\pdfbookmark[1]{Model}{Model}%
+The make and style of one of the pieces of furniture in a set.
+This may also include color, wood type, or stain of the wood.
+
+\item[\emph{\hypertarget{Model-Feature-rel}{features}:}]
+\pdfbookmark[1]{features}{Model-Feature-rel}%
+Each model in a set has the option to include extra features.
+These features may be things such as different styled knobs or legs.
+
+\item[\strong{\hypertarget{Feature}{Feature}:}]
+\pdfbookmark[1]{Feature}{Feature}%
+Each model in a set can include an optional item that is not normally included.
+These are usually extra adornments.
+
+\item[\emph{\hypertarget{Model-Finish-rel}{is finished with}:}]
+\pdfbookmark[1]{is finished with}{Model-Finish-rel}%
+Each model can be finished in a variety of textures, colors, and materials, or can be unfinished.
+
+\item[\strong{\hypertarget{Finish}{Finish}:}]
+\pdfbookmark[1]{Finish}{Finish}%
+Each model can be chosen to have a specific finish.
+The finish varies by color and material and describes the aesthetic of the set.
+
+\item[\emph{\hypertarget{Model-Item-rel}{describes}:}]
+\pdfbookmark[1]{describes}{Model-Item-rel}%
+Each model describes some of the items in the store database.
+The items described by a given model are all \textquote[][]{copies} of each other.
+
+\item[\strong{\hypertarget{Item}{Item}:}]
+\pdfbookmark[1]{Item}{Item}%
+The specific piece of furniture that the database lists.
+Items are distinguished from one another by their specific SKU number.
+
+\begin{enumerate}[leftmargin=*,widest={\strong{Bedframe:}}]
+
+\item[\strong{\hypertarget{Chair}{Chair}:}]
+\pdfbookmark[2]{Chair}{Chair}%
+A simple seat for one person; has three or more legs.
+The chair will also contain a back that the customer can sit against that is a specific height.
+
+\item[\strong{\hypertarget{Table}{Table}:}]
+\pdfbookmark[2]{Table}{Table}%
+A flat surface elevated by a three or more legs.
+The table is distinguished by its size and shape.
+
+\item[\strong{\hypertarget{Desk}{Desk}:}]
+\pdfbookmark[2]{Desk}{Desk}%
+A flat or sloped elevated surface atop a chest of drawers or compartments.
+
+\item[\strong{\hypertarget{Stool}{Stool}:}]
+\pdfbookmark[2]{Stool}{Stool}%
+A seat without a back or arms.
+Must have three or more legs and no back.
+
+\item[\strong{\hypertarget{Cabinet}{Cabinet}:}]
+\pdfbookmark[2]{Cabinet}{Cabinet}%
+A piece of furniture used for storage, usually containing drawers or shelves.
+The cabinet can either sit on the floor atop a few legs or it can be mounted directly to the wall.
+
+\item[\strong{\hypertarget{Bedframe}{Bedframe}:}]
+\pdfbookmark[2]{Bedframe}{Bedframe}%
+The frame of a bed that supports the mattress.
+This includes a headboard, a footboard, and some rails.
+\end{enumerate}
+
+\item[\strong{\hypertarget{DistributionCenter}{Distribution Center}:}]
+\pdfbookmark[1]{Distribution Center}{DistributionCenter}%
+A factory or warehouse from which items are directly shipped to the store.
+
+\item[\emph{\hypertarget{DistributionCenter-Supplier-rel}{can order from}:}]
+\pdfbookmark[1]{can order from}{DistributionCenter-Supplier-rel}%
+A distribution center can order models, sets of models, or specific items from a particular supplier, and will do so both on a regular schedule and in response to a special request from the store.
+
+\item[\emph{\hypertarget{DistributionCenter-Item-rel}{stocks}:}]
+\pdfbookmark[1]{stocks}{DistributionCenter-Item-rel}%
+Distribution centers will hold items until they are shipped out to the store.
+Items can also be directly requested from a distribution center by the store's customers.
+
+\end{enumerate}
+
+\section*{Group Work}
+\pdfbookmark[0]{Group Work}{GroupWork}%
+\begin{enumerate}[leftmargin=*,widest={Alexander:}]
+
+\item[Alexander:]
+\pdfbookmark[1]{Alexander}{Alexander}%
+Alexander created the initial sketch design for the ER Diagram and formatted the design as elements were added.
+He also contributed to the design as it progressed.
+
+\item[Timothy:]
+\pdfbookmark[1]{Timothy}{Timothy}%
+Timothy contributed the necessary elements for the ER diagram, helped write the descriptions for the ER diagram, and attended office hours to discuss possible revisions with the professor.
+
+\item[Schuyler:]
+\pdfbookmark[1]{Schuyler}{Schuyler}%
+Schuyler contributed the necessary elements for the ER diagram, helped write the descriptions for the ER diagram, and attended office hours to discuss possible revisions with the professor.
+
+\end{enumerate}
+
+\end{document}

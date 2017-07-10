@@ -1,0 +1,5 @@
+Alexander: Provided update and revision to part 2 ER diagram to fit a real world application and provided initial write-up of relations.
+
+Timothy: Provided input, feedback, and correction to part 2 revisions as well as to write-up of relations.
+
+Schuyler: Provided input, feedback, and correction to part 2 revisions as well as to write-up of relations.

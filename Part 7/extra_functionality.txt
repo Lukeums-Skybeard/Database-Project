@@ -1,0 +1,6 @@
+For extra functionality, we decided to implement a search function into the webpage. This search bar allows a "customer"
+to search the database in a "keyword" fashion, just like they would on a real store website. This way, we can search the
+items that our store can sell in a way that an actual customer would and return results that are relevant to that search.
+For example, searching for "Table" returns all of the tables in the database and even shows a picture next to the item.
+Granted this is just a placeholder image for each of the different items that the store sells but it is a proof of concept
+more than anything.

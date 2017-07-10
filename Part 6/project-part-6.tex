@@ -1,0 +1,478 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = lualatexmk-shell
+\RequirePackage{ucharcat,uspace,etex,shellesc}
+\RequirePackage[1.7,compress,objcompress]{bxpdfver}
+\documentclass[american,extrafontsizes,12pt,portrait,letterpaper,oneside,onecolumn,article,final]{memoir}
+\settypeoutlayoutunit{in}
+\pagestyle{plain}
+\setulmarginsandblock{1in}{1in}{*}
+\setlrmarginsandblock{1in}{1in}{*}
+\setheadfoot{0.5in}{0.5in}
+\usepackage{etoolbox,indentfirst,pdftexcmds,ragged2e,magicnum,atveryend,regexpatch,graphicx,dotlessi,checkend,calc,alphalph,thinsp,pbox,xfrac,xsavebox,xspace}
+\usepackage[usestackEOL]{stackengine}
+\usepackage[table]{xcolor}
+\usepackage{colorspace,longtable}
+\usepackage[longtable]{multirow}
+\usepackage{bigstrut,bigdelim,fontaxes,arydshln,diagbox,collcell,scalerel,hhline,fvextra}
+\usepackage{amssymb,amsmath,amsthm,delim}
+\usepackage{accents,mathtools,thmtools,empheq,iffont,unicode-math,realscripts,metalogo,mathpartir,luatextra,minted}
+\renewcommand\MintedPygmentize{/Library/Frameworks/Python.framework/Versions/Current/bin/pygmentize}
+\usepackage[normalem]{ulem}
+\setmainfont{DejaVuSerif}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Italic},
+BoldItalicFont={*-BoldItalic},
+FontFace={c}{n}{*Condensed},
+FontFace={cb}{n}{*Condensed-Bold},
+FontFace={c}{it}{*Condensed-Italic},
+FontFace={cb}{it}{*Condensed-BoldItalic}
+]
+\setsansfont{DejaVuSans}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Oblique},
+BoldItalicFont={*-BoldOblique},
+FontFace={c}{n}{*Condensed},
+FontFace={cb}{n}{*Condensed-Bold},
+FontFace={c}{it}{*Condensed-Oblique},
+FontFace={cb}{it}{*Condensed-BoldOblique},
+FontFace={el}{n}{*-ExtraLight}
+]
+\setmonofont{DejaVuSansMono}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Oblique},
+BoldItalicFont={*-BoldOblique}
+]
+\setmathfont{DejaVuSerif}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={up->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-Bold}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfup->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-Italic}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={it->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-BoldItalic}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={sfup->up,bb->bb,bbit->bbit},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-Bold}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfsfup->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-Oblique}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={sfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-BoldOblique}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfsfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSansMono}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={tt->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuMathTeXGyre}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase
+]
+\usepackage[inline]{enumitem}
+\usepackage{linegoal}
+\usepackage[linegoal,delarray]{tabu}
+\usepackage{hyphenat,hyperxmp,hyperref,polyglossia}
+\setdefaultlanguage[variant=american]{english}
+\usepackage[english=american,maxlevel=6]{csquotes}
+\usepackage[american]{selnolig}
+\usepackage[calc,useregional]{datetime2}
+\usepackage{microtype,tikz,tikzpagenodes}
+\usetikzlibrary{babel,scopes,quotes,calc,through,fit,matrix,chains,arrows.meta,circuits.logic.US,graphs,graphdrawing,automata,positioning,er,tikzmark}
+\usegdlibrary{trees,layered,force,circular,routing}
+\usepackage[tikz]{ocgx2}
+%\usepackage{showhyphens}
+\microtypesetup{activate=all}
+\hypersetup{unicode=true,pdflang={en}}
+\usemintedstyle{xcode}
+\nolig{ffic}{f|fic}
+\nolig{affin}{af|fin}
+\tikzstyle{every picture}+=[remember picture,outer sep=auto]
+
+\newcommand*\rnmath[1]{\(\displaystyle #1 \textstyle\)}
+\newcommand\band{\mathbin{∧}}
+\newcommand\bor{\mathbin{∨}}
+\newcommand\bnot{\mathopen{∼}}
+\newcommand\TT{\mathord{\symsfup{T}}}
+\newcommand\FF{\mathord{\symsfup{F}}}
+\newcommand\taut{\mathord{\symbfup{t}}}
+\newcommand\cont{\mathord{\symbfup{c}}}
+\newcommand\bqed{\mathpunct{∎}}
+\newcommand\blank{\mathord{-}}
+\newcommand\divslash{\mathbin{∕}}
+\newcommand\fracslash{\mathbin{⁄}}
+\DeclarePairedDelimiterX\divides[2]{}{}{#1 \mathrel{\delimsize∣} #2}
+\DeclarePairedDelimiterX\ndivides[2]{}{}{#1 \mathrel{\delimsize∤} #2}
+\newcommand\negative{\mathopen{-}}
+\newcommand\mult{\mathbin{·}}
+\newcommand\factorial{\mathclose{!}}
+\DeclarePairedDelimiter\floor{⌊}{⌋}
+\DeclarePairedDelimiter\ceiling{⌈}{⌉}
+\newcommand\exto{\mathpunct{϶}}
+\DeclarePairedDelimiter\card{\lvert}{\rvert}
+\newcommand*\rproj[1]{\mathop{π_{#1}}}
+\newcommand*\rsel[1]{\mathop{σ_{#1}}}
+\newcommand*\rname[1]{\mathop{ρ_{#1}}}
+\newcommand*\rjoin[1]{\mathbin{⋈_{#1}}}
+\newcommand\rcross{\mathbin{×}}
+\newcommand\runion{\mathbin{∪}}
+\newcommand\rintersection{\mathbin{∩}}
+\newcommand\rdiff{\mathbin{-}}
+\colorlet{gRed}{red!75!black}
+\colorlet{gBlue}{blue!75!black}
+\colorlet{gGray}{white!25!black}
+\newcommand*\email[2][]{\href[#1]{mailto:#2}{\nolinkurl{#2}}}
+\newcommand*\TODO{\textcolor{red}{[TODO]}\xspace}
+\newcommand*{\sqli}[1]{\mintinline[breaklines,breakbytokenanywhere]{mysql}{#1}}
+\newcommand*{\sqlm}[1]{\text{\sqli{#1}}}
+\newcommand*{\mysqli}[1]{\mintinline[breaklines,breakbytokenanywhere]{mysql}{#1}}
+\newcommand*{\mysqlm}[1]{\text{\mysqli{#1}}}
+
+\author{Timothy Gibson, Alexander Altman, and Schuyler Davis}
+\title{Team GLASTA's \emph{Fantastic Furniture}: Database Queries}
+\date{\DTMdate{2017-05-02}}
+
+\begin{document}
+\checkandfixthelayout[nearest]
+\midsloppy
+\begin{Center}
+\textsf{\strong{\LARGE\thetitle}}
+\end{Center}
+
+\begin{samepage}%
+\section*{Team Info}
+\pdfbookmark[0]{Team Info}{team-info}%
+\begin{Center}
+\begin{tabu}[t]{rlr}
+\strong{Team Name:} & \multicolumn{2}{c}{Team GLASTA}\\
+\tabucline[2\arrayrulewidth]{-}
+\strong{Project Name:} & \multicolumn{2}{c}{\emph{Fantastic Furniture}}\\
+\tabucline[2\arrayrulewidth]{-}
+\ldelim\{{3}{*}[\strong{Participants:}] & Timothy Gibson & \email{tgibson1@csustan.edu}\\
+\tabucline{2-}
+& Alexander Altman & \email{aaltman@csustan.edu}\\
+\tabucline{2-}
+& Schuyler Davis & \email{sdavis20@csustan.edu}\\
+\end{tabu}
+\end{Center}%
+\end{samepage}
+
+\section*{SQL Schemas}
+\pdfbookmark[0]{SQL Schemas}{schemas}%
+
+\inputminted[linenos,breaklines,breakbytokenanywhere]{mysql}{mysql.sql}
+
+\section*{Sample Queries}
+\pdfbookmark[0]{Sample Queries}{queries}%
+\begin{enumerate}[leftmargin=*,label={\strong{\uline{(\emph{\Alph*})}}}]
+
+\item
+\begin{enumerate}[leftmargin=*,widest={\strong{Explanation:}}]
+\item[\strong{Intent:}] \textquote[][?]{How many models has each designer designed}
+\item[\strong{Query:}]
+\begin{minted}[breaklines,breakanywhere]{mysql}
+SELECT M.designerID,
+       COUNT(C.modelNumber)
+FROM   Designer D
+       LEFT OUTER JOIN make M
+                    ON ( D.designerID = M.designerID )
+       INNER JOIN contains_ C
+               ON ( M.setID = C.setID )
+GROUP  BY M.designerID;
+\end{minted}
+\item[\strong{Result:}]
+\begin{minted}[breaklines,breakanywhere]{text}
++------------+----------------------+
+| designerID | count(C.modelNumber) |
++------------+----------------------+
+| 3lejckzNYS |                   69 |
+| 4MVbu2iI15 |                  170 |
+| 7RYpyw9es0 |                  212 |
+| 7ZZbCsXnv0 |                  210 |
+| A7oA1v9Ax1 |                  212 |
+| AZadqlHsUN |                  232 |
+| b9yOGUx3pl |                  213 |
+| bBMMbiXWX2 |                  189 |
+| bDcoTRYgku |                  148 |
+| BejwYSNzm7 |                  142 |
+| bjSmt6EX8o |                  193 |
+| bnQDB9V4ZQ |                  215 |
+| bOQ84LG8yQ |                  246 |
+| BVP4o4g0u6 |                  121 |
+| c1jIajAyha |                  142 |
+| czfBYIFNhs |                  252 |
+| eAm5FaKjru |                  196 |
+| ejSgB4P19T |                  215 |
+| EZn2c6Sqao |                  164 |
+| fLM0vFMD6h |                  190 |
+| HACGEeYiTg |                  182 |
+| hL6koxT8vK |                  265 |
+| HULdxdPYgo |                  130 |
+| HUPang5JW4 |                  181 |
+| in19yTwFqy |                  254 |
+| jMt9cpvHJ8 |                  218 |
+| kFNSGfDIXN |                  200 |
+| KH4hmznKQN |                  252 |
+| KoaWPsykpt |                  244 |
+| L2vFnWn5yt |                  170 |
+| lA2l4dUPAN |                  265 |
+| MBxLmTyDx0 |                  152 |
+| nUFwyC0BAj |                  167 |
+| nxtwKjphvt |                  260 |
+| OLkEycvtOv |                   99 |
+| p3f6twELII |                  203 |
+| P9Vg4XQ5AK |                  267 |
+| pIdz2ArSJd |                  168 |
+| PWFixIVSN0 |                  197 |
+| ql0bQqFgKx |                  224 |
+| rdYk2JSFOZ |                  229 |
+| sUUNXUZjSB |                  174 |
+| TnFL7eVZD9 |                  246 |
+| UKHmNCJ1Ep |                  211 |
+| uQJBa7yRRm |                  240 |
+| VXBvjILW4l |                  255 |
+| VyLXDToji5 |                  186 |
+| Xi0fOUOila |                  200 |
+| YOpJVyms0T |                  151 |
+| yz0xcnsOMA |                  212 |
++------------+----------------------+
+50 rows in set (0.01 sec)
+\end{minted}
+\item[\strong{Explanation:}] This query is plausible because someone might want to check which designers were more prolific; this might inform their decision on whose furniture to buy.
+
+This result is sensible, though somewhat unlikely in the real world; there are 50 designers and 1000 models, and each designer has designed about 200 models on average, so each model has about 10 designers.
+Further investigation into the data validated this calculation, so the query gave the intended result, even if that result was unintuitive.
+\end{enumerate}
+
+\item
+\begin{enumerate}[leftmargin=*,widest={\strong{Explanation:}}]
+\item[\strong{Intent:}] \textquote[][?]{What is the average lead time from suppliers to distribution centers when both are in the same country}
+\item[\strong{Query:}]
+\begin{minted}[breaklines,breakanywhere]{mysql}
+SELECT AVG(leadTime)
+FROM   Supplier S,
+       DistributionCenter C,
+       canOrderFrom O
+WHERE  S.supplierID = O.supplierID
+   AND C.centerID = O.centerID
+   AND S.country = C.country;
+\end{minted}
+\item[\strong{Result:}]
+\begin{minted}[breaklines,breakanywhere]{text}
++-------------------+
+| AVG(leadTime)     |
++-------------------+
+| 5.333333333333333 |
++-------------------+
+1 row in set (0.00 sec)
+\end{minted}
+\item[\strong{Explanation:}] This query is plausible because someone might want to know how long, on average, they'd have to wait for furniture to arrive at the distribution centers after being ordered.
+
+This result is sensible because it gives a single result to a query that contains only an aggregation function and no grouping.
+\end{enumerate}
+
+\item
+\begin{enumerate}[leftmargin=*,widest={\strong{Explanation:}}]
+\item[\strong{Intent:}] \textquote[][?]{Which suppliers can get me a claw\hyp footed bedframe in less than a week}
+\item[\strong{Query:}]
+\begin{minted}[breaklines,breakanywhere]{mysql}
+SELECT DISTINCT O.supplierID
+FROM   Bedframe B,
+       describes D,
+       features_Feature F,
+       canOrderFrom O,
+       stocks S
+WHERE  B.sku = D.sku
+   AND D.modelNumber = F.modelNumber
+   AND F.description = 'Claw Feet'
+   AND O.centerID = S.centerID
+   AND S.sku = B.sku
+   AND O.leadTime < 7.0;
+\end{minted}
+\item[\strong{Result:}]
+\begin{minted}[breaklines,breakanywhere]{text}
++------------+
+| supplierID |
++------------+
+| 45AVHG6SDL |
+| dWuUGFOe1b |
+| lGSxEQQ8bN |
+| 4hGbj2aBVR |
+| socFXUsXAD |
+| 0x1V8UVLqh |
+| umALkT56Xy |
+| xUMVYgBI7J |
+| FE34LTqb2p |
+| ldbBahbqLj |
+| ryNb8O1TRs |
+| tRJBEnEFaO |
+| ATeybFIuTQ |
+| 7n94AZBOkB |
+| Op8rarVKxa |
+| FyAzhOpNly |
+| WY3AmkQmxs |
+| xyEInQvE1U |
+| ZxsJeaFpg5 |
+| 06DeQdaf4X |
+| 5SKHZGJsjV |
+| FVzpxLJFKK |
+| uluou8izCd |
+| nZ4msLXxTY |
+| x7FolH1EsA |
+| xJZiBD5DIo |
+| cUrmX3GV4D |
+| KQIGJ9eDk5 |
+| 8pYnVWzpzR |
+| 9Hzdyajzdu |
+| 9kQZDUILDP |
+| 3LnmekGoPa |
+| 4xp0ETTkc8 |
+| IBvWjkFney |
+| XIFO3VhtQH |
++------------+
+35 rows in set (0.00 sec)
+\end{minted}
+\item[\strong{Explanation:}] This query is plausible because a customer might very well want a bedframe---with particular attributes, even---within a specified time limit.
+
+This result seems reasonable, because it feels fairly realistic that claw\hyp footed bedframes wouldn't be particularly rare, so 35 of our 50 available suppliers carrying them seems fine.
+It should be noted that, the first time this query was run, we forgot the \mysqli{DISTINCT} keyword after \mysqli{SELECT}; this gave us 100 (obviously non\hyp unique) results, and taught us a lesson about not assuming automatic distinctness in the result of a complex query just because the result column is a primary key in its original table.
+\end{enumerate}
+
+\item
+\begin{enumerate}[leftmargin=*,widest={\strong{Explanation:}}]
+\item[\strong{Intent:}] \textquote[][?]{How many items is my old buddy Harold stocking in that warehouse of his}
+\item[\strong{Query:}]
+\begin{minted}[breaklines,breakanywhere]{mysql}
+SELECT COUNT(*)
+FROM   stocks S,
+       DistributionCenter D
+WHERE  S.centerID = D.centerID
+   AND D.name_ = 'Harold and His Big Ass Warehouse';
+\end{minted}
+\item[\strong{Result:}]
+\begin{minted}[breaklines,breakanywhere]{text}
++----------+
+| COUNT(*) |
++----------+
+|        7 |
++----------+
+1 row in set (0.00 sec)
+\end{minted}
+\item[\strong{Explanation:}] This query is plausible because somebody might actually care about Harold's business success (or lack thereof).
+We wanted to make a query that involved a specific name or attribute to make sure we could return small data as well as larger data.
+
+Apparently Harold has a lot of wasted space right now; blame the economy.
+\end{enumerate}
+
+\item
+\begin{enumerate}[leftmargin=*,widest={\strong{Explanation:}}]
+\item[\strong{Intent:}] \textquote[][?]{Which sets have more than two chairs and at least one table}
+\item[\strong{Query:}]
+\begin{minted}[breaklines,breakanywhere]{mysql}
+SELECT DISTINCT C.setID
+FROM   contains_ C
+WHERE  (SELECT COUNT(DISTINCT I.sku) * C.count_
+        FROM   Table_ I,
+               describes D
+        WHERE  D.sku = I.sku
+           AND D.modelNumber = C.modelNumber) >= 1
+   AND (SELECT COUNT(DISTINCT I.sku) * C.count_
+        FROM   Chair I,
+               describes D
+        WHERE  D.sku = I.sku
+           AND D.modelNumber = C.modelNumber) > 2;
+\end{minted}
+\item[\strong{Result:}]
+\begin{minted}[breaklines,breakanywhere]{text}
+Empty set (0.00 sec)
+\end{minted}
+\item[\strong{Explanation:}] This query is plausible because someone might want some dinner furniture in a professionally matched set.
+
+I guess we don't carry any of that kind of set; oh well!
+\end{enumerate}
+
+\end{enumerate}
+
+\section*{Group Work}
+\pdfbookmark[0]{Group Work}{group-work}%
+\begin{samepage}%
+\begin{enumerate}[leftmargin=*,widest={Alexander:}]
+
+\item[Timothy:]
+\pdfbookmark[1]{Timothy}{Timothy}%
+Checked the queries and results for sensibility.
+
+\item[Alexander:]
+\pdfbookmark[1]{Alexander}{Alexander}%
+Ran the queries against the database and recorded their results.
+
+\item[Schuyler:]
+\pdfbookmark[1]{Schuyler}{Schuyler}%
+Checked the queries and results for sensibility.
+
+\end{enumerate}%
+\end{samepage}
+
+\end{document}

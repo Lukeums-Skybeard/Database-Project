@@ -1,0 +1,11 @@
+Someone working in a furniture store would definitely consider using our database. Our web enabled database can search
+for specific pieces of furniture that customers would search for, and this search is done in a similar way to other
+product websites. The data is also presented in a list that doesn't mirror the style of an actual product page but
+presents the appropriate data. This is enough of a proof of concept that it could present it in a way that "looks good"
+to a customer.
+
+Our approach is largely worse than similar systems. This is simply due to the style in which the data from the
+database is presented. With ample time, we are confident that we could ensure that the data for each tuple is presented
+in a usable way that could mirror a product page. Our approach to the presentation of the data is what we believe to be
+ close to how professional databases store information on products in an online store. Our presentation, however,
+ leaves much to be desired, as simple tables with almost arbitrary information is not aesthetically pleasing.

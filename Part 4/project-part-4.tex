@@ -1,0 +1,445 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = lualatexmk-shell
+\RequirePackage{ucharcat,uspace,etex,shellesc}
+\RequirePackage[1.7,compress,objcompress]{bxpdfver}
+\documentclass[american,extrafontsizes,12pt,portrait,letterpaper,oneside,onecolumn,article,final]{memoir}
+\settypeoutlayoutunit{in}
+\pagestyle{plain}
+\setulmarginsandblock{1in}{1in}{*}
+\setlrmarginsandblock{1in}{1in}{*}
+\setheadfoot{0.5in}{0.5in}
+\usepackage{etoolbox,indentfirst,pdftexcmds,ragged2e,magicnum,atveryend,regexpatch,graphicx,dotlessi,checkend,calc,alphalph,thinsp,pbox,xfrac,xsavebox,xspace}
+\usepackage[usestackEOL]{stackengine}
+\usepackage[table]{xcolor}
+\usepackage{colorspace,longtable}
+\usepackage[longtable]{multirow}
+\usepackage{bigstrut,bigdelim,fontaxes,arydshln,diagbox,collcell,scalerel,hhline,fvextra}
+\usepackage{amssymb,amsmath,amsthm,delim}
+\usepackage{accents,mathtools,thmtools,empheq,iffont,unicode-math,realscripts,metalogo,mathpartir,luatextra,minted}
+\renewcommand\MintedPygmentize{/Library/Frameworks/Python.framework/Versions/Current/bin/pygmentize}
+\usepackage[normalem]{ulem}
+\setmainfont{DejaVuSerif}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Italic},
+BoldItalicFont={*-BoldItalic},
+FontFace={c}{n}{*Condensed},
+FontFace={cb}{n}{*Condensed-Bold},
+FontFace={c}{it}{*Condensed-Italic},
+FontFace={cb}{it}{*Condensed-BoldItalic}
+]
+\setsansfont{DejaVuSans}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Oblique},
+BoldItalicFont={*-BoldOblique},
+FontFace={c}{n}{*Condensed},
+FontFace={cb}{n}{*Condensed-Bold},
+FontFace={c}{it}{*Condensed-Oblique},
+FontFace={cb}{it}{*Condensed-BoldOblique},
+FontFace={el}{n}{*-ExtraLight}
+]
+\setmonofont{DejaVuSansMono}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+UprightFont={*},
+BoldFont={*-Bold},
+ItalicFont={*-Oblique},
+BoldItalicFont={*-BoldOblique}
+]
+\setmathfont{DejaVuSerif}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={up->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-Bold}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfup->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-Italic}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={it->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSerif-BoldItalic}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={sfup->up,bb->bb,bbit->bbit},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-Bold}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfsfup->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-Oblique}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={sfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSans-BoldOblique}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={bfsfit->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuSansMono}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase,
+range={tt->up},
+script-features={},
+sscript-features={}
+]
+\setmathfont{DejaVuMathTeXGyre}[
+Path={/Library/Fonts/},
+Extension={.ttf},
+Scale=MatchLowercase
+]
+\usepackage[inline]{enumitem}
+\usepackage{linegoal}
+\usepackage[linegoal,delarray]{tabu}
+\usepackage{hyphenat,hyperxmp,hyperref,polyglossia}
+\setdefaultlanguage[variant=american]{english}
+\usepackage[english=american,maxlevel=6]{csquotes}
+\usepackage[american]{selnolig}
+\usepackage[calc,useregional]{datetime2}
+\usepackage{microtype,tikz,tikzpagenodes}
+\usetikzlibrary{babel,scopes,quotes,calc,through,fit,matrix,chains,arrows.meta,circuits.logic.US,graphs,graphdrawing,automata,positioning,er,tikzmark}
+\usegdlibrary{trees,layered,force,circular,routing}
+\usepackage[tikz]{ocgx2}
+%\usepackage{showhyphens}
+\microtypesetup{activate=all}
+\hypersetup{unicode=true,pdflang={en}}
+\usemintedstyle{xcode}
+\nolig{ffic}{f|fic}
+\nolig{affin}{af|fin}
+\tikzstyle{every picture}+=[remember picture,outer sep=auto]
+
+\newcommand*\rnmath[1]{\(\displaystyle #1 \textstyle\)}
+\newcommand\band{\mathbin{∧}}
+\newcommand\bor{\mathbin{∨}}
+\newcommand\bnot{\mathopen{∼}}
+\newcommand\TT{\mathord{\symsfup{T}}}
+\newcommand\FF{\mathord{\symsfup{F}}}
+\newcommand\taut{\mathord{\symbfup{t}}}
+\newcommand\cont{\mathord{\symbfup{c}}}
+\newcommand\bqed{\mathpunct{∎}}
+\newcommand\blank{\mathord{-}}
+\newcommand\divslash{\mathbin{∕}}
+\newcommand\fracslash{\mathbin{⁄}}
+\DeclarePairedDelimiterX\divides[2]{}{}{#1 \mathrel{\delimsize∣} #2}
+\DeclarePairedDelimiterX\ndivides[2]{}{}{#1 \mathrel{\delimsize∤} #2}
+\newcommand\negative{\mathopen{-}}
+\newcommand\mult{\mathbin{·}}
+\newcommand\factorial{\mathclose{!}}
+\DeclarePairedDelimiter\floor{⌊}{⌋}
+\DeclarePairedDelimiter\ceiling{⌈}{⌉}
+\newcommand\exto{\mathpunct{϶}}
+\DeclarePairedDelimiter\card{\lvert}{\rvert}
+\newcommand*\rproj[1]{\mathop{π_{#1}}}
+\newcommand*\rsel[1]{\mathop{σ_{#1}}}
+\newcommand*\rname[1]{\mathop{ρ_{#1}}}
+\newcommand*\rjoin[1]{\mathbin{⋈_{#1}}}
+\newcommand\rcross{\mathbin{×}}
+\newcommand\runion{\mathbin{∪}}
+\newcommand\rintersection{\mathbin{∩}}
+\newcommand\rdiff{\mathbin{-}}
+\colorlet{gRed}{red!75!black}
+\colorlet{gBlue}{blue!75!black}
+\colorlet{gGray}{white!25!black}
+\newcommand*\email[2][]{\href[#1]{mailto:#2}{\nolinkurl{#2}}}
+\newcommand*\TODO{\textcolor{red}{[TODO]}\xspace}
+\newcommand*{\sqli}[1]{\mintinline[breaklines,breakbytoken]{sql}{#1}}
+\newcommand*{\sqlm}[1]{\text{\sqli{#1}}}
+
+\author{Timothy Gibson, Alexander Altman, and Schuyler Davis}
+\title{Team GLASTA's \emph{Fantastic Furniture}:\\*Normalization}
+\date{\DTMdate{2017-04-13}}
+
+\begin{document}
+\checkandfixthelayout[nearest]
+\midsloppy
+\begin{Center}
+\textsf{\strong{\LARGE\thetitle}}
+\end{Center}
+
+\begin{samepage}%
+\section*{Team Info}
+\pdfbookmark[0]{Team Info}{team-info}%
+\begin{Center}
+\begin{tabu}[t]{rlr}
+\strong{Team Name:} & \multicolumn{2}{c}{Team GLASTA}\\
+\tabucline[2\arrayrulewidth]{-}
+\strong{Project Name:} & \multicolumn{2}{c}{\emph{Fantastic Furniture}}\\
+\tabucline[2\arrayrulewidth]{-}
+\ldelim\{{3}{*}[\strong{Participants:}] & Timothy Gibson & \email{tgibson1@csustan.edu}\\
+\tabucline{2-}
+& Alexander Altman & \email{aaltman@csustan.edu}\\
+\tabucline{2-}
+& Schuyler Davis & \email{sdavis20@csustan.edu}\\
+\end{tabu}
+\end{Center}%
+\end{samepage}
+
+\section*{Initial Relations}
+\pdfbookmark[0]{Initial Relations}{original}%
+
+\inputminted[linenos]{sql}{original.sql}
+
+\subsection*{Functional Dependencies}
+\pdfbookmark[1]{Functional Dependencies}{fundeps}%
+
+\begin{longtabu}{rcll}
+\sqli{supplierID} & \rnmath{\longrightarrow} & \sqli{name_} & \rdelim\}{5}{*}[\sqli{Supplier}]\\*
+\sqli{supplierID} & \rnmath{\longrightarrow} & \sqli{phone} &\\*
+\sqli{supplierID} & \rnmath{\longrightarrow} & \sqli{address} &\\*
+\sqli{supplierID} & \rnmath{\longrightarrow} & \sqli{country} &\\*
+\sqli{supplierID} & \rnmath{\longrightarrow} & \sqli{website} &\\
+\sqli{designerID} & \rnmath{\longrightarrow} & \sqli{name_} & \rdelim\}{6}{*}[\sqli{Designer}]\\*
+\sqli{designerID} & \rnmath{\longrightarrow} & \sqli{phone} &\\*
+\sqli{designerID} & \rnmath{\longrightarrow} & \sqli{address} &\\*
+\sqli{designerID} & \rnmath{\longrightarrow} & \sqli{country} &\\*
+\sqli{designerID} & \rnmath{\longrightarrow} & \sqli{website} &\\*
+\sqli{designerID} & \rnmath{\longrightarrow} & \sqli{designFocus} &\\
+\sqli{setID} & \rnmath{\longrightarrow} & \sqli{name_} & \rdelim\}{4}{*}[\sqli{Set_}]\\*
+\sqli{setID} & \rnmath{\longrightarrow} & \sqli{catalogYear} &\\*
+\sqli{setID} & \rnmath{\longrightarrow} & \sqli{catalogNumber} &\\*
+\sqli{setID} & \rnmath{\longrightarrow} & \sqli{style_} &\\
+\sqli{modelNumber} & \rnmath{\longrightarrow} & \sqli{name_} & \rdelim\}{5}{*}[\sqli{Model}]\\*
+\sqli{modelNumber} & \rnmath{\longrightarrow} & \sqli{material} &\\*
+\sqli{modelNumber} & \rnmath{\longrightarrow} & \sqli{upholstery} &\\*
+\sqli{modelNumber} & \rnmath{\longrightarrow} & \sqli{durability} &\\*
+\sqli{modelNumber} & \rnmath{\longrightarrow} & \sqli{color} &\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{name_} & \rdelim\}{6}{*}[\sqli{Item}]\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{dimensions.length_} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{dimensions.width} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{dimensions.height} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{condition} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{weightLimit} &\\
+\sqli{centerID} & \rnmath{\longrightarrow} & \sqli{name_} & \rdelim\}{5}{*}[\sqli{DistributionCenter}]\\*
+\sqli{centerID} & \rnmath{\longrightarrow} & \sqli{phone} &\\*
+\sqli{centerID} & \rnmath{\longrightarrow} & \sqli{address} &\\*
+\sqli{centerID} & \rnmath{\longrightarrow} & \sqli{country} &\\*
+\sqli{centerID} & \rnmath{\longrightarrow} & \sqli{website} &\\
+\multicolumn{4}{c}{\emph{Note: the \sqli{make} relation has no nontrivial functional dependencies.}}\\
+\rnmath{\{\sqlm{setID}, \sqlm{modelNumber}\}} & \rnmath{\longrightarrow} & \sqli{count_} & \rdelim\}{1}{*}[\sqli{contains_}]\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{modelNumber} & \rdelim\}{1}{*}[\sqli{describes}]\\
+\rnmath{\{\sqlm{centerID}, \sqlm{supplierID}\}} & \rnmath{\longrightarrow} & \sqli{leadTime} & \rdelim\}{1}{*}[\sqli{canOrderFrom}]\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{centerID} & \rdelim\}{1}{*}[\sqli{stocks}]\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{numberOfLegs} & \rdelim\}{5}{*}[\sqli{Chair}]\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{hasCushion} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{hasArms} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{backHeight} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{seatHeight} &\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{numberOfLegs} & \rdelim\}{3}{*}[\sqli{Table_}]\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{numberOfSeats} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{shape} &\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{angle} & \rdelim\}{2}{*}[\sqli{Desk}]\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{numberOfDrawers} &\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{numberOfLegs} & \rdelim\}{3}{*}[\sqli{Stool}]\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{hasCushion} &\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{hasSwivel} &\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{numberOfCompartments} & \rdelim\}{2}{*}[\sqli{Cabinet}]\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{capacity} &\\
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{size_} & \rdelim\}{2}{*}[\sqli{Bedframe}]\\*
+\sqli{sku} & \rnmath{\longrightarrow} & \sqli{depth_} &\\
+\rnmath{\{\sqlm{modelNumber}, \sqlm{description}\}} & \rnmath{\longrightarrow} & \sqli{count_} & \rdelim\}{1}{*}[\sqli{features_Feature}]\\
+\end{longtabu}
+
+\subsubsection*{Functional Dependency Notes}
+\pdfbookmark[2]{Functional Dependency Notes}{fundep-notes}%
+
+One might think, at first, that several attributes of \sqli{Supplier} (such as \sqli{website} and \sqli{phone}) should be candidate keys by virtue of uniquely determining the primary key \sqli{supplierID}.
+However, consider the following scenario: a supplier is an independent carpenter living in a country whose laws (for whatever reason) disallow any one single business from selling both chairs and bedframes.
+This carpenter produces both types of items, but, because of the laws of his home country, he has to run two separate businesses from the legal perspective.
+The inevitable result of us getting furniture from this carpenter is two \sqli{Supplier} tuples with (necessarily) distinct \sqli{supplierID}s but where \emph{every other attribute is identical}!
+Therefore, by constructed counterexample, \sqli{Supplier}'s only candidate key is its primary key \sqli{supplierID}; very similar reasoning applies to \sqli{DistributionCenter} and \sqli{Designer} as well.
+
+\section*{Normalized Relations}
+\pdfbookmark[0]{Normalized Relations}{normalized}%
+
+\inputminted[linenos]{sql}{normalized.sql}
+
+\subsection*{Normal Forms}
+\pdfbookmark[1]{Normal Forms}{normal-forms}%
+
+\begin{enumerate}[leftmargin=*,widest={\texttt{DistributionCenter}}]
+
+\item[\sqli{Supplier}]
+\sqli{Supplier} is in BCNF.
+Each functional dependency in the relation points back to \sqli{supplierID}.
+Every other attribute of the relation is dependent on \sqli{supplierID} and as such is a member of the candidate key.
+Also, every attribute of the \sqli{Supplier} relation is functionally determined by \sqli{supplierID}, making it the superkey.
+
+\item[\sqli{Designer}]
+\sqli{Designer} is in BCNF.
+\sqli{designerID} determines every attribute of the \sqli{Designer} relation.
+This effectively makes \sqli{designerID} the superkey for the \sqli{Designer} relation.
+
+\item[\sqli{Set_}]
+The \sqli{Set_} relation is in BCNF.
+\sqli{Set_} has a candidate key that is \sqli{setID}.
+Each attribute of \sqli{Set_} is unique to a specific \sqli{setID}.
+This indicates that each attribute is determined by that setID.
+This makes setID the superkey for \sqli{Set_}.
+From this, it lends that \sqli{Set_} is in BCNF because that for every non\hyp trivial functional dependency, \sqli{setID} is the superkey.
+
+\item[\sqli{Model}]
+\sqli{Model} is in BCNF.
+For every attribute of the \sqli{Model} relation, they are functionally determined by the \sqli{modelNumber}, meaning that they are only determined by one specific \sqli{modelNumber}.
+This makes \sqli{modelNumber} the superkey for \sqli{Model}.
+
+\item[\sqli{Item}]
+The \sqli{Item} relation is in BCNF.
+The attribute \sqli{sku} is a single identifier for each individual item.
+Each item has one \sqli{name}, \sqli{length_}, \sqli{width}, \sqli{height}, and \sqli{weightLimit}. Each of these attributes are dependent on one \sqli{sku}.
+This makes \sqli{sku} the superkey for \sqli{Item}.
+Since all attributes are dependent on a single \sqli{sku} then \sqli{Item} is in BCNF.
+
+In our original SQL, the \sqli{Item} relation used a type (\sqli{dimensions}) that was created specifically for that relation in its table.
+That type's fields have now been defined inline inside of the table so that it complies with the requirements of BCNF.
+
+\item[\sqli{DistributionCenter}]
+\sqli{DistributionCenter} is in BCNF.
+Each \sqli{name_}, \sqli{phone}, \sqli{address}, \sqli{country}, and \sqli{website} is specific to one \sqli{centerID}.
+This makes \sqli{centerID} the superkey for the \sqli{DistributionCenter} relation.
+Since each attribute is only populated by one tuple and the superkey determines every attribute, then the \sqli{DistributionCenter} relation is in BCNF.
+
+\item[\sqli{make}]
+The \sqli{make} relation is in BCNF, since it only contains trivial functional dependencies.
+
+\item[\sqli{contains_}]
+The \sqli{contains_} relation is in BCNF.
+The \sqli{contains_} relation has a primary key of \rnmath{\{\sqlm{setID}, \sqli{modelNumber}\}}.
+These two together effectively become the superkey and since the count of the \sqli{contains_} relation can be determined by the \sqli{setID} and \sqli{modelNumber}, \sqli{contains_} is in BCNF.
+
+\item[\sqli{describes}]
+The \sqli{describes} relation is in BCNF.
+The \sqli{describes} relation includes two foreign keys that together also form the primary key.
+These two keys are \sqli{modelNumber} and \sqli{sku}.
+The \sqli{modelNumber} specifically determines a single \sqli{sku}.
+This means that \sqli{sku} is dependent on the \sqli{modelNumber} and that \sqli{modelNumber} is the superkey. Since the only non\hyp trivial functional dependency in the \sqli{describes} relation involves the superkey determining the single other attribute, \sqli{describes} is in BCNF.
+
+\item[\sqli{canOrderFrom}]
+The \sqli{canOrderFrom} relation is in BCNF.
+The \sqli{canOrderFrom} relation has an attribute called \sqli{leadTime}.
+This \sqli{leadTime} is dependent on the distribution center (identified by \sqli{centerID}) and the supplier (identified by \sqli{supplierID}).
+This \sqli{centerID} and \sqli{supplierID} are both part of the primary key for \sqli{canOrderFrom} and together make up its superkey.
+For this reason, \sqli{canOrderFrom} is in BCNF.
+
+\item[\sqli{stocks}]
+The \sqli{stocks} relation is in BCNF.
+The \sqli{stocks} relation has a primary key of \sqli{sku}.
+Since \sqli{centerID} is dependent on \sqli{sku} and the \sqli{stocks} relation borrows both \sqli{sku} and \sqli{centerID} from other relations, \sqli{sku} is the superkey.
+For this reason, \sqli{stocks} is in BCNF.
+
+\item[\sqli{Chair}]
+The \sqli{Chair} relation is in BCNF.
+The \sqli{Chair} relation is a subset of the \sqli{Item} relation.
+Each chair has one of each of its attributes that is strictly related to its \sqli{sku}.
+This makes the \sqli{sku} the superkey for the \sqli{Chair} relation.
+As such, since each functional dependency is dependent on \sqli{sku}, \sqli{Chair} is in BCNF.
+
+\item[\sqli{Table_}]
+The \sqli{Table_} relation is in BCNF.
+The \sqli{Table_} relation is a subset of the \sqli{Item} relation.
+Each table has one of each of its attributes that is strictly related to its \sqli{sku}.
+This makes the \sqli{sku} the superkey for the \sqli{Table_} relation.
+As such, since each functional dependency is dependent on \sqli{sku}, \sqli{Table_} is in BCNF.
+
+\item[\sqli{Desk}]
+The \sqli{Desk} relation is in BCNF.
+The \sqli{Desk} relation is a subset of the \sqli{Item} relation.
+Each desk has one of each of its attributes that is strictly related to its \sqli{sku}.
+This makes the \sqli{sku} the superkey for the \sqli{Desk} relation.
+As such, since each functional dependency is dependent on \sqli{sku}, \sqli{Desk} is in BCNF.
+
+
+\item[\sqli{Stool}]
+The \sqli{Stool} relation is in BCNF.
+The \sqli{Stool} relation is a subset of the \sqli{Item} relation.
+Each stool has one of each of its attributes that is strictly related to its \sqli{sku}.
+This makes the \sqli{sku} the superkey for the \sqli{Stool} relation.
+As such, since each functional dependency is dependent on \sqli{sku}, \sqli{Stool} is in BCNF.
+
+\item[\sqli{Cabinet}]
+The \sqli{Cabinet} relation is in BCNF.
+The \sqli{Cabinet} relation is a subset of the \sqli{Item} relation.
+Each cabinet has one of each of its attributes that is strictly related to its \sqli{sku}.
+This makes the \sqli{sku} the superkey for the \sqli{Cabinet} relation.
+As such, since each functional dependency is dependent on \sqli{sku}, \sqli{Cabinet} is in BCNF.
+
+
+\item[\sqli{Bedframe}]
+The \sqli{Bedframe} relation is in BCNF.
+The \sqli{Bedframe} relation is a subset of the Item relation.
+Each bedframe has one of each of its attributes that is strictly related to its \sqli{sku}.
+This makes the \sqli{sku} the superkey for the \sqli{Bedframe} relation.
+As such, since each functional dependency is dependent on \sqli{sku}, \sqli{Bedframe} is in BCNF.
+
+\item[\sqli{features_Feature}]
+This relation is in BCNF.
+The \sqli{features_Feature} relation has a key that it contains called \sqli{description}.
+This \sqli{description}, however long it may be, will be distinct meaning that each feature has a specific \sqli{description} fitting to that specific feature.
+This makes \rnmath{\{\sqlm{modelNumber}, \sqlm{description}\}} the superkey for \sqli{features_Feature}.
+Also, since \sqli{count_} is dependent specifically on the description of that feature for that model, it is dependent on the superkey; this means that \sqli{features_Feature} is in BCNF.
+
+\end{enumerate}
+
+\section*{Group Work}
+\pdfbookmark[0]{Group Work}{group-work}%
+\begin{samepage}%
+\begin{enumerate}[leftmargin=*,widest={Alexander:}]
+
+\item[Alexander:]
+\pdfbookmark[1]{Alexander}{Alexander}%
+Modified the SQL to 1NF; looked over the conversions to BCNF.
+
+\item[Timothy:]
+\pdfbookmark[1]{Timothy}{Timothy}%
+Modified the tables to 3NF or BCNF; created the descriptions of the tables.
+
+\item[Schuyler:]
+\pdfbookmark[1]{Schuyler}{Schuyler}%
+Played a little catch\hyp up and wrote up these descriptions.
+
+\end{enumerate}%
+\end{samepage}
+
+\end{document}

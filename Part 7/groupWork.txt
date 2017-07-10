@@ -1,0 +1,9 @@
+Alexander Altman: Alexander was the dedicated first draft coder for all project parts. He made sure that the basic framework
+of the database was always at least minimally functional.
+
+Schuyler Davis: Schuyler filled the role of supervisory and conceptualizing. Schuyler was in charge of stepping back and examining
+project implementation from different angles. He also ensured things "made sense" for our data domain. He filled a mostly "administrative" role.
+
+Timothy Gibson: Timothy was the second draft coder and scripter. Timothy checked the work of Alexander, making sure database
+implementation was coherent. Timothy also wrote the bulk of the scripts that generated the data for the database. Timothy also worked along
+side Alexander in making sure implementation was on task.

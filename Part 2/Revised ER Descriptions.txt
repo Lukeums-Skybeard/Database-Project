@@ -1,0 +1,51 @@
+Distribution Center: This displays the factory or warehouse that the item or set was shipped from to the store.
+
+Stocks: Distribution centers will hold items, sets of items, or specific models until they are shipped out to stores. They can also be directly ordered from the center by the customer.
+
+canOrderFrom: A supplier can order items, sets of items, or specific models from a specific distribution center, but distribution centers also make scheduled deliveries to stores.
+
+Supplier: This displays the company who made the piece of furniture.
+
+Makes: This describes what the manufacturer does, which is fabricate a set of furniture. 
+
+Set: A collection of pieces of furniture that fit into one aesthetic style or are part of a matching group of pieces.
+
+Contains:  Each set of furniture incorporates many different models of furniture. These models will all fit the same color, design, or aesthetic style.
+
+Model: The make and style of a one of the pieces of furniture in a set. This may also include color, wood type or stain of the wood.
+
+Features: Each model in a set has the option to include extra features. These features may be things such as different styled knobs or legs.
+
+Feature: Each model in a set can include an optional item that is not normally included. These are usually extra adornments.
+
+was finished with: Each set can be finished in a variety of textures, colors, materials or can unfinished.
+
+Finish: Each set can be chosen to have a specific finish. The finish varies by color and material and describes the aesthetic of the set.
+
+Describes: Each model is a unique item in the store database. Each model is distinguished somewhat by its visual style or color.
+
+Item: The specific piece of furniture that the database lists. Pieces are distinguished from one another by their specific SKU number.
+
+Chair: A simple seat for one person. Consists of a few legs that are three or more. The chair will also contain a back that the customer can sit against that is a specific height.
+
+Table: A flat surface elevated by a few legs. The number of legs must be three or more. The table is distinguished by its size and shape.
+
+Desk: A flat or sloped elevated surface atop a chest of drawers or compartments.
+
+Stool: a seat without a back or arms. Must have three or more legs and no back.
+
+Cabinet: A piece of furniture used for storage, usually containing drawers or shelves. The cabinet can either sit on the floor atop a few legs or it can be mounted directly to the wall.
+
+Bedframe: The frame of the bed that supports the mattress. This contains a headboard, a footboard and some rails. 
+
+Justifications:
+
+The Manufacturer only has one relationship with the set, they fabricated it. Each set can contain any number of models in its collection, but each model is only contained in one set. Because of this, model and set only have a binary relationship. Features are attached to models one at a time, meaning that each model is fitted with a specific feature regardless of whether other items in the set are fitted with a feature. The relationship between model and finish must also be binary because even though, traditionally, each set would have a single color finish, some sets can contain models that are deliberately finished in other finishes to complement the rest of the set. Model and Item are also exclusively a binary relationship because each item only describes one model. The model does not describe other items intrinsically.
+
+Group Work: 
+
+Alexander: Alexander created the initial sketch design for the ER Diagram and formatted the design as elements were added. He also contributed to the design as it progressed.
+
+Timothy: Timothy contributed the necessary elements for the ER diagram, helped write the descriptions for the ER diagram, and attended office hours to discuss possible revisions with the professor. 
+
+Schuyler: Schuyler contributed the necessary elements for the ER diagram, helped write the descriptions for the ER diagram, and attended office hours to discuss possible revisions with the professor.

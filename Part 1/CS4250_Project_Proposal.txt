@@ -1,0 +1,23 @@
+GLASTA Project Proposal
+Names:
+•	Project Name: ________
+•	Participants:
+o	Timothy Gibson, tgibson1@csustan.edu
+o	Alexander Altman, “email”
+o	Schuyler Davis, “email”
+Domain:
+
+User Group:
+	The intended user group for the database application will be customers at a furniture store. The application will allow customers to quickly find furniture that they are shopping for. The application will be used by customers when they visit the website to see different types of furniture sold by the store and can sort them by different categories and characteristics such as color, size, type of furniture, or room each piece goes in, among others.
+Domain:
+	The domain of the database application will include different types of furniture. These pieces of furniture will be divided into different categories and subsets of furniture. These categories will then also have sub-categories for further narrowing of customer search results.
+What will be modelled:
+	The system will model a database of furniture for a furniture website. The system will model different types of furniture, their categories, their different characteristics and the different applications of the furniture pieces. The system will not model an application that will be used by the store staff. The system will not include information that is important for employees who work at the store such as shipment dates, shipping routes for each piece, in stock dates, out of stock date, or other such data. The intent of the database is to catalog all the information a customer seeking to buy furniture would find relevant.
+Ground Rules:
+1.	Complete every task assigned to you
+2.	Communicate with group members about problems or concerns
+3.	Give as much feedback as possible
+4.	Attend every group meeting
+5.	Tell group members about inability to perform tasks or attend group meetings BEFOREHAND
+Facilities:
+	Other facilities that the system could support could also be a database application for store employees or another. The system could also support a suggestion tool to suggest pieces of furniture to customers based on viewing or buying habits. The system could also support a system that would show different pieces of furniture in a simulated room to show off furniture to the customer. Finally, the system could also support a furniture listing system for customers to save lists of specific pieces of furniture for future viewing or purchase.
